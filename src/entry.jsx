@@ -1,4 +1,4 @@
 import React from 'react';
-import AppController from './controller/AppController.jsx';
+import {AppController} from 'controllers';
 
 React.render(<AppController />, document.getElementById('content'));

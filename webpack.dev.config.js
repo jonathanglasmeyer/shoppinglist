@@ -5,9 +5,6 @@ var hostname = process.env.HOT_LOAD_HOSTNAME || 'localhost';
 var port = process.env.HOT_LOAD_PORT || 8888;
 
 module.exports = {
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
   entry: {
     app: [
       'webpack-dev-server/client?http://' + hostname + ':' + port,
@@ -32,6 +29,10 @@ module.exports = {
 
       {test: /\.(?:eot|ttf|svg|woff2?)$/, loader: 'file-loader?name=[path][name]-[hash:6].[ext]&context=assets'}
     ]
+  },
+  resolve: {
+    modulesDirectories: ['node_modules', 'src/components'],
+    extensions: ['', '.js', '.jsx', '.less']
   },
   plugins: [
     new webpack.IgnorePlugin(/vertx/),
