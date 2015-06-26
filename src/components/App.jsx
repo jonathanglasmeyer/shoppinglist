@@ -2,6 +2,7 @@ import React from 'react';
 import {Parse} from 'parse';
 import ParseComponent from 'parse-react/class';
 import ParseReact from 'parse-react';
+import {ShoppingList} from 'components';
 
 export default class App extends ParseComponent {
   static propTypes = {
@@ -25,7 +26,13 @@ export default class App extends ParseComponent {
   render() {
 
     if (this.data.user) {
-      return <div>Logged in as {this.data.user.username}</div>;
+      return <div>
+        <p>
+          Logged in as {this.data.user.username}
+          <button onClick={::this._logout}>Log out</button>
+        </p>
+        <ShoppingList />
+      </div>;
     }
 
     // if user is not logged in
@@ -41,7 +48,8 @@ export default class App extends ParseComponent {
         </button>
         <input
           type="checkbox"
-          checked={this.state.signup}>
+          checked={this.state.signup}
+          onChange={::this._toggleSignup}>
 
           Signup
         </input>
@@ -93,6 +101,10 @@ export default class App extends ParseComponent {
 
 
     console.info('[App.jsx] ', username, password);
+  }
+
+  _logout() {
+    Parse.User.logOut();
   }
 
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {App} from 'controllers';
+import {App} from 'components';
 import {Parse} from 'parse';
 
 
