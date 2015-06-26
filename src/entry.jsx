@@ -1,4 +1,11 @@
 import React from 'react';
-import {AppController} from 'controllers';
+import {App} from 'controllers';
+import {Parse} from 'parse';
 
-React.render(<AppController />, document.getElementById('content'));
+
+import {PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_ID} from '../config/parse.js';
+
+// Insert your app's keys here:
+Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_ID);
+
+React.render(<App />, document.getElementById('content'));

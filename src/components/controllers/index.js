@@ -1,1 +1,1 @@
-export AppController from './AppController.jsx';
+export App from './App.jsx';

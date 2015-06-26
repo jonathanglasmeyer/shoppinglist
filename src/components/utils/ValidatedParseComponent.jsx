@@ -1,6 +1,6 @@
-import {Component} from 'react';
+import ParseComponent from 'parse-react/class';
 
-export default process.env.NODE_ENV === 'development' ? class ValidatedComponent extends Component {
+export default process.env.NODE_ENV === 'development' ? class ValidatedParseComponent extends ParseComponent {
   static toJSON() {
     return this.name;
   }
@@ -27,4 +27,4 @@ export default process.env.NODE_ENV === 'development' ? class ValidatedComponent
       }
     }
   }
-} : Component;
+} : ParseComponent;
