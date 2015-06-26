@@ -2,6 +2,7 @@ import React from 'react';
 import ParseComponent from 'parse-react/class';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
+import {SHOPPINGLIST_ITEM} from 'constants';
 
 export default class ShoppingList extends ParseComponent {
   static propTypes = {
@@ -9,11 +10,10 @@ export default class ShoppingList extends ParseComponent {
   }
 
   observe() {
-    const query = new Parse.Query('Todo');
-    query.equalTo('user', Parse.User.current());
-    query.ascending('updatedAt');
     return {
-      todos: query
+      items: new Parse.Query(SHOPPINGLIST_ITEM)
+        .equalTo('user', Parse.User.current())
+        .ascending('updatedAt')
     };
   }
 
@@ -25,7 +25,7 @@ export default class ShoppingList extends ParseComponent {
         <button type='submit'>Add Item</button>
       </form>
       <ul>
-        {this.data.todos.map(todo => <li key={todo.id}>{todo.name}</li>)}
+        {this.data.items.map(item => <li key={item.id}>{item.name}</li>)}
       </ul>
     </div>;
   }
@@ -41,9 +41,9 @@ export default class ShoppingList extends ParseComponent {
       return;
     }
 
-    console.info('[ShoppingList.jsx] ', input);
+    console.info('[ShoppingList.jsx] ', SHOPPINGLIST_ITEM);
 
-    ParseReact.Mutation.Create('Todo', {
+    ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
       name: input,
       done: false,
       user: Parse.User.current().toPlainObject()
