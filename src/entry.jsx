@@ -1,5 +1,5 @@
 import React from 'react';
-import {App} from 'components';
+import App from 'components/App.jsx';
 import {Parse} from 'parse';
 
 

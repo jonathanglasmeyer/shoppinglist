@@ -2,6 +2,9 @@ import React from 'react';
 import ParseComponent from 'parse-react/class';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
+
+import ShoppingListItem from './ShoppingListItem.jsx';
+
 import {SHOPPINGLIST_ITEM} from 'constants';
 
 export default class ShoppingList extends ParseComponent {
@@ -25,7 +28,10 @@ export default class ShoppingList extends ParseComponent {
         <button type='submit'>Add Item</button>
       </form>
       <ul>
-        {this.data.items.map(item => <li key={item.id}>{item.name}</li>)}
+        {this.data.items.map(item =>
+            <ShoppingListItem
+              key={item.id}
+              item={item} />)}
       </ul>
     </div>;
   }

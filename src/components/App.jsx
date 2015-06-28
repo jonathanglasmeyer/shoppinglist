@@ -2,7 +2,10 @@ import React from 'react';
 import {Parse} from 'parse';
 import ParseComponent from 'parse-react/class';
 import ParseReact from 'parse-react';
-import {ShoppingList} from 'components';
+import {ShoppingListPage} from 'pages';
+
+import NavigationBar from './App/NavigationBar.jsx';
+import Footer from './App/Footer.jsx';
 
 export default class App extends ParseComponent {
   static propTypes = {
@@ -24,14 +27,18 @@ export default class App extends ParseComponent {
   }
 
   render() {
+    const page = <ShoppingListPage />;
 
+    // if user is logged in
     if (this.data.user) {
+
       return <div>
-        <p>
-          Logged in as {this.data.user.username}
-          <button onClick={::this._logout}>Log out</button>
-        </p>
-        <ShoppingList />
+        <NavigationBar />
+        {page}
+        <Footer
+          username={this.data.user.username}
+          onLogout={::this._handleLogout}/>
+
       </div>;
     }
 
@@ -103,7 +110,7 @@ export default class App extends ParseComponent {
     console.info('[App.jsx] ', username, password);
   }
 
-  _logout() {
+  _handleLogout() {
     Parse.User.logOut();
   }
 
