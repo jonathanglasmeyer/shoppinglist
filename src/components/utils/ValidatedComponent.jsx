@@ -18,6 +18,11 @@ export default process.env.NODE_ENV === 'development' ? class ValidatedComponent
     const {displayName, name, propTypes} = this.constructor;
     const componentName = displayName || name;
 
+    // the wrapper doesn't copy the proptypes over, so we are lost here...
+    if (componentName.includes('Radium')) {
+      return;
+    }
+
     if (!propTypes && Object.keys(props).length) {
       // this seems to be a special case with radium wrapper
       // where children = null is returned...

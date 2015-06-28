@@ -2,13 +2,30 @@ import React from 'react';
 import ParseComponent from 'parse-react/class';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
+import Radium from 'radium';
+import _ from 'lodash';
 
 import ShoppingListItem from './ShoppingListItem.jsx';
 import ShoppingListInput from './ShoppingListInput.jsx';
 import ShoppingListTitlebar from './ShoppingListTitlebar.jsx';
+import ShoppingListFooter from './ShoppingListFooter.jsx';
 
 import {SHOPPINGLIST_ITEM} from 'constants';
 
+import {LIST_ITEM_HEIGHT} from 'styles/dimensions';
+
+const style = {
+  minHeight: '100%'
+  // display: 'flex',
+  // flexDirection: 'column'
+};
+
+const listStyle = {
+  flex: '1 0 auto',
+  marginBottom: LIST_ITEM_HEIGHT + 8
+};
+
+@Radium
 export default class ShoppingList extends ParseComponent {
   static propTypes = {
 
@@ -24,20 +41,31 @@ export default class ShoppingList extends ParseComponent {
 
   render() {
 
-    return <div>
-      <ShoppingListTitlebar />
-      <ShoppingListInput onSubmit={::this._onAddItem}/>
-      <ul>
+
+    return <div style={style}>
+      <ul style={listStyle}>
+        <ShoppingListTitlebar
+          allDone={::this._allDone()}
+          onSetAllDone={::this._handleSetAllDone} />
+        <ShoppingListInput onSubmit={::this._handleAddItem}/>
         {this.data.items.map(item =>
             <ShoppingListItem
-              onSetDone={::this._onSetDone}
+              onSetDone={::this._handleSetDone}
               key={item.id}
               item={item} />)}
       </ul>
+      <ShoppingListFooter />
     </div>;
   }
 
-  _onAddItem(name) {
+  /**
+   * returns: bool
+   */
+  _allDone() {
+    return _.all(this.data.items, item => item.done);
+  }
+
+  _handleAddItem(name) {
 
     ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
       name,
@@ -50,8 +78,17 @@ export default class ShoppingList extends ParseComponent {
    * item: the whole parse item
    * done: bool
    */
-  _onSetDone(item, done) {
+  _handleSetDone(item, done) {
     ParseReact.Mutation.Set(item, {done}).dispatch();
+  }
+
+  _handleSetAllDone() {
+
+    const bool = !this._allDone();
+
+    this.data.items.forEach(item => {
+      ParseReact.Mutation.Set(item, {done: bool}).dispatch();
+    });
   }
 
 }

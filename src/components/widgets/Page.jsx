@@ -8,9 +8,13 @@ import {DESKTOP} from 'styles/sizes';
 const style = {
   width: '95%',
   maxWidth: PAGE_WIDTH,
+  borderRadius: 2,
+  minHeight: '100%',
   background: '#fff',
   flex: 1,
-  boxShadow: '2px 2px 2px 0 rgba(0, 0, 0, 0.08)',
+  position: 'relative',
+           // hor vert blur spread
+  boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.1)',
   marginTop: 8,
 
   [DESKTOP]: {

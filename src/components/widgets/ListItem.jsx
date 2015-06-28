@@ -15,6 +15,7 @@ const clickableStyle = {
 
 const baseStyle = {
   height: LIST_ITEM_HEIGHT,
+  width: '100%',
   cursor: 'default',
   listStyleType: 'none',
   padding: '0 16px',
