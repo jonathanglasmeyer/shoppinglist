@@ -4,6 +4,8 @@ import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 
 import ShoppingListItem from './ShoppingListItem.jsx';
+import ShoppingListInput from './ShoppingListInput.jsx';
+import ShoppingListTitlebar from './ShoppingListTitlebar.jsx';
 
 import {SHOPPINGLIST_ITEM} from 'constants';
 
@@ -23,10 +25,8 @@ export default class ShoppingList extends ParseComponent {
   render() {
 
     return <div>
-      <form onSubmit={::this._onAddItem}>
-        <input type='text' ref='input' />
-        <button type='submit'>Add Item</button>
-      </form>
+      <ShoppingListTitlebar />
+      <ShoppingListInput onSubmit={::this._onAddItem}/>
       <ul>
         {this.data.items.map(item =>
             <ShoppingListItem
@@ -36,21 +36,10 @@ export default class ShoppingList extends ParseComponent {
     </div>;
   }
 
-  _onAddItem(e) {
-    e.preventDefault();
-    const inputField = React.findDOMNode(this.refs.input);
-    const input = inputField.value;
-
-    inputField.value = '';
-
-    if (!input) {
-      return;
-    }
-
-    console.info('[ShoppingList.jsx] ', SHOPPINGLIST_ITEM);
+  _onAddItem(name) {
 
     ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
-      name: input,
+      name,
       done: false,
       user: Parse.User.current().toPlainObject()
     }).dispatch();

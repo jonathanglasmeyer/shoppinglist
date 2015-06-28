@@ -3,16 +3,14 @@ import {ValidatedComponent} from 'utils';
 
 import ShoppingList from './ShoppingListPage/ShoppingList.jsx';
 
-export default class ShoppingListPage extends ValidatedComponent {
-  static propTypes = {
+import {Page} from 'widgets';
 
-  }
+export default class ShoppingListPage extends ValidatedComponent {
 
   render() {
-
-    return <div>
+    return <Page>
       <ShoppingList />
-    </div>;
+    </Page>;
   }
 
 }

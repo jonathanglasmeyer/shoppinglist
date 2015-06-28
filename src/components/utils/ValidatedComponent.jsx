@@ -17,12 +17,18 @@ export default process.env.NODE_ENV === 'development' ? class ValidatedComponent
 
     const {displayName, name, propTypes} = this.constructor;
     const componentName = displayName || name;
+
     if (!propTypes && Object.keys(props).length) {
+      // this seems to be a special case with radium wrapper
+      // where children = null is returned...
+      if (Object.keys(props).length === 1 && 'children' in props) {
+        return;
+      }
       console.warn(`There are no PropTypes specified on component "${componentName}". Cannot validate props. The given props are: `, props);
       return;
     }
     for (let prop in props) {
-      if (!propTypes[prop]) {
+      if (!propTypes[prop] && prop !== 'children') {
         console.warn(`You set a property "${prop}" on Component "${componentName}" but did not provide a PropType declaration for this prop.`);
       }
     }

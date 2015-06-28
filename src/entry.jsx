@@ -2,6 +2,8 @@ import React from 'react';
 import App from 'components/App.jsx';
 import {Parse} from 'parse';
 
+require('./styles/global.less');
+
 
 import {PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_ID} from '../config/parse.js';
 

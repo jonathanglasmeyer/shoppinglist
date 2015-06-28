@@ -1,12 +1,21 @@
 import React from 'react';
 import {Parse} from 'parse';
+import Radium from 'radium';
 import ParseComponent from 'parse-react/class';
 import ParseReact from 'parse-react';
 import {ShoppingListPage} from 'pages';
 
-import NavigationBar from './App/NavigationBar.jsx';
+// import NavigationBar from './App/NavigationBar.jsx';
 import Footer from './App/Footer.jsx';
 
+const style = {
+  display: 'flex',
+  minHeight: '100%',
+  flexDirection: 'column',
+  alignItems: 'center'
+};
+
+@Radium
 export default class App extends ParseComponent {
   static propTypes = {
 
@@ -32,8 +41,8 @@ export default class App extends ParseComponent {
     // if user is logged in
     if (this.data.user) {
 
-      return <div>
-        <NavigationBar />
+      return <div style={style}>
+        {/*<NavigationBar />*/}
         {page}
         <Footer
           username={this.data.user.username}
