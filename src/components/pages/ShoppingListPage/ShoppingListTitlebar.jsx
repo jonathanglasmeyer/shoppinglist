@@ -5,6 +5,7 @@ import Radium from 'radium';
 import {ListItem} from 'widgets';
 
 const style = {
+  borderBottom: `1px solid rgba(0,0,0,.15)`,
   fontSize: 20
 };
 

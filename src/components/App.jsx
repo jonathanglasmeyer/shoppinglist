@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {Parse} from 'parse';
 import Radium from 'radium';
 import ParseComponent from 'parse-react/class';
@@ -11,7 +11,7 @@ import Footer from './App/Footer.jsx';
 // import mui from 'material-ui';
 // const ThemeManager = new mui.Styles.ThemeManager();
 
-import {GREEN, RED} from 'styles/colors';
+// import {GREEN, RED} from 'styles/colors';
 
 const style = {
   display: 'flex',

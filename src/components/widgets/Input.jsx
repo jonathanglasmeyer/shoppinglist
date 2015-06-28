@@ -22,7 +22,7 @@ export default class Input extends ValidatedComponent {
     const {onSubmit} = this.props;
 
     return <form style={styleForm} onSubmit={::this._onSubmit}>
-      <input placeholder='Article' style={style} type='text' ref='input' />
+      <input placeholder='New Article' style={style} type='text' ref='input' />
     </form>;
   }
 

@@ -2,11 +2,11 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import {ListItem} from 'widgets';
 
-import {GRAY} from 'styles/colors';
+import {GRAY_DISABLED_TEXT} from 'styles/colors';
 
 const doneStyle = {
   textDecoration: 'line-through',
-  color: GRAY
+  color: GRAY_DISABLED_TEXT
 };
 
 
