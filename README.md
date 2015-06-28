@@ -9,7 +9,7 @@ i'll have to see how much of the code i will reuse. probably not to much, as i l
 - javascript es6/7 via babel
 - react
 - webpack
-- redux (https://github.com/gaearon/redux)
-- react router
-- maybe elemental-ui or material-ui
+- parse.com
+- (react router)
+- (maybe elemental-ui or material-ui)
 
