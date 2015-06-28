@@ -2,8 +2,13 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
+const styleForm = {
+  width: '100%'
+};
+
 const style = {
-  border: 'none'
+  border: 'none',
+  width: '100%'
 };
 
 @Radium
@@ -16,7 +21,7 @@ export default class Input extends ValidatedComponent {
   render() {
     const {onSubmit} = this.props;
 
-    return <form onSubmit={::this._onSubmit}>
+    return <form style={styleForm} onSubmit={::this._onSubmit}>
       <input placeholder='Article' style={style} type='text' ref='input' />
     </form>;
   }

@@ -30,6 +30,7 @@ export default class ShoppingList extends ParseComponent {
       <ul>
         {this.data.items.map(item =>
             <ShoppingListItem
+              onSetDone={::this._onSetDone}
               key={item.id}
               item={item} />)}
       </ul>
@@ -43,6 +44,14 @@ export default class ShoppingList extends ParseComponent {
       done: false,
       user: Parse.User.current().toPlainObject()
     }).dispatch();
+  }
+
+  /**
+   * item: the whole parse item
+   * done: bool
+   */
+  _onSetDone(item, done) {
+    ParseReact.Mutation.Set(item, {done}).dispatch();
   }
 
 }

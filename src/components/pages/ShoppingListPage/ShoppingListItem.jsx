@@ -2,15 +2,27 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import {ListItem} from 'widgets';
 
+import {GRAY} from 'styles/colors';
+
+const doneStyle = {
+  textDecoration: 'line-through',
+  color: GRAY
+};
+
+
 export default class ShoppingListItem extends ValidatedComponent {
   static propTypes = {
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    onSetDone: PropTypes.func.isRequired
   }
 
   render() {
-    const {item} = this.props;
-    const style = item.done ? {textDecoration: 'line-through'} : {};
-    return <ListItem style={style}>
+    const {item, onSetDone} = this.props;
+    const style = item.done ? doneStyle : {};
+    return <ListItem
+      style={style}
+      onClick={() => onSetDone(item, !item.done)}
+      clickable>
       {item.name}
     </ListItem>;
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Parse} from 'parse';
 import Radium from 'radium';
 import ParseComponent from 'parse-react/class';
@@ -7,6 +7,10 @@ import {ShoppingListPage} from 'pages';
 
 // import NavigationBar from './App/NavigationBar.jsx';
 import Footer from './App/Footer.jsx';
+
+import mui from 'material-ui';
+const ThemeManager = new mui.Styles.ThemeManager();
+import {GREEN, RED} from 'styles/colors';
 
 const style = {
   display: 'flex',
@@ -17,9 +21,6 @@ const style = {
 
 @Radium
 export default class App extends ParseComponent {
-  static propTypes = {
-
-  }
 
   constructor(props) {
     super(props);
@@ -27,6 +28,25 @@ export default class App extends ParseComponent {
       error: null,
       signup: false
     };
+  }
+
+  static childContextTypes = {
+    muiTheme: PropTypes.object
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+
+  componentWillMount() {
+    super.componentWillMount();
+
+    ThemeManager.setPalette({
+      primary1Color: GREEN,
+      accent1Color: RED
+    });
   }
 
   observe() {
@@ -42,7 +62,7 @@ export default class App extends ParseComponent {
     if (this.data.user) {
 
       return <div style={style}>
-        {/*<NavigationBar />*/}
+        {/*<NavigationBar /> */}
         {page}
         <Footer
           username={this.data.user.username}
@@ -91,7 +111,6 @@ export default class App extends ParseComponent {
     }
 
     const user = new Parse.User({username, password});
-    console.info('[App.jsx] ', user);
 
     if (this.state.signup) {
       user.signUp().then(() => {
@@ -114,9 +133,6 @@ export default class App extends ParseComponent {
         });
       });
     }
-
-
-    console.info('[App.jsx] ', username, password);
   }
 
   _handleLogout() {
