@@ -12,8 +12,8 @@ const style = {
 @Radium
 export default class ShoppingListTitlebar extends ValidatedComponent {
   static propTypes = {
-    onSetAllDone: PropTypes.func, // it is required, but Radium sucks
-    allDone: PropTypes.bool // dito.
+    onSetAllDone: PropTypes.func.isRequired,
+    allDone: PropTypes.bool.isRequired
   }
 
   render() {
