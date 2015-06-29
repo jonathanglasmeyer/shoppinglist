@@ -8,10 +8,8 @@ import {ShoppingListPage} from 'pages';
 // import NavigationBar from './App/NavigationBar.jsx';
 import Footer from './App/Footer.jsx';
 
-import mui from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
 
-import {GREEN, RED} from 'styles/colors';
+// import {GREEN, RED} from 'styles/colors';
 
 const style = {
   display: 'flex',
@@ -29,25 +27,6 @@ export default class App extends ParseComponent {
       error: null,
       signup: false
     };
-  }
-
-  static childContextTypes = {
-    muiTheme: PropTypes.object
-  }
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  }
-
-  componentWillMount() {
-    super.componentWillMount();
-
-    ThemeManager.setPalette({
-      primary1Color: GREEN,
-      accent1Color: RED
-    });
   }
 
   observe() {

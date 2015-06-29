@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {Checkbox} from 'material-ui';
 import {ListItem} from 'widgets';
 
 const style = {
@@ -19,11 +18,8 @@ export default class ShoppingListTitlebar extends ValidatedComponent {
   render() {
     const {onSetAllDone, allDone} = this.props;
 
-    return <ListItem clickable big onClick={onSetAllDone}>
-      <Checkbox
-        labelStyle={style}
-        checked={allDone}
-        label='Shoppinglist'/>
+    return <ListItem key={0} style={style} big>
+      Shopping List
     </ListItem>;
   }
 

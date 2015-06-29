@@ -3,7 +3,7 @@ import ParseComponent from 'parse-react/class';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import Radium from 'radium';
-import _ from 'lodash';
+import {all as _all} from 'lodash/collection';
 
 import ShoppingListItem from './ShoppingListItem.jsx';
 import ShoppingListInput from './ShoppingListInput.jsx';
@@ -62,7 +62,7 @@ export default class ShoppingList extends ParseComponent {
    * returns: bool
    */
   _allDone() {
-    return _.all(this.data.items, item => item.done);
+    return _all(this.data.items, item => item.done);
   }
 
   _handleAddItem(name) {

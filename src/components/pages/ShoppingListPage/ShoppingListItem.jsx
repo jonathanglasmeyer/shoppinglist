@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import {ListItem} from 'widgets';
-import {Checkbox} from 'material-ui';
 
 import {GRAY_DISABLED_TEXT} from 'styles/colors';
 
@@ -22,14 +21,10 @@ export default class ShoppingListItem extends ValidatedComponent {
     const style = item.done ? doneStyle : {};
 
     return <ListItem
-      clickable
-      onClick={() => onSetDone(item, !item.done)}>
-
-      <Checkbox
-        labelStyle={style}
-        checked={item.done}
-        label={item.name}/>
-
+      style={style}
+      onClick={() => onSetDone(item, !item.done)}
+      clickable>
+      {item.name}
     </ListItem>;
   }
 
