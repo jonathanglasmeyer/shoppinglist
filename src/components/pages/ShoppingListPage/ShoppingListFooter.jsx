@@ -12,13 +12,14 @@ const style = {
 @Radium
 export default class ShoppingListFooter extends ValidatedComponent {
   static propTypes = {
-
+    onDeleteDone: PropTypes.func.isRequired
   }
 
   render() {
+    const {onDeleteDone} = this.props;
 
     return <ListItem style={style}>
-      footer
+      <a onClick={onDeleteDone}>Archive done items</a>
     </ListItem>;
   }
 

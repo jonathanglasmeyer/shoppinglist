@@ -41,7 +41,6 @@ export default class ShoppingList extends ParseComponent {
 
   render() {
 
-
     return <div style={style}>
       <ul style={listStyle}>
         <ShoppingListTitlebar
@@ -54,7 +53,7 @@ export default class ShoppingList extends ParseComponent {
               key={item.id}
               item={item} />)}
       </ul>
-      <ShoppingListFooter />
+      <ShoppingListFooter onDeleteDone={::this._handleDeleteAllDone}/>
     </div>;
   }
 
@@ -89,6 +88,11 @@ export default class ShoppingList extends ParseComponent {
     this.data.items.forEach(item => {
       ParseReact.Mutation.Set(item, {done: bool}).dispatch();
     });
+  }
+
+  _handleDeleteAllDone() {
+    const doneItems = this.data.items.filter(item => item.done);
+    doneItems.forEach(item => ParseReact.Mutation.Destroy(item).dispatch());
   }
 
 }
