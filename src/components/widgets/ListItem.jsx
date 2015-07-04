@@ -1,16 +1,21 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import Radium from 'radium';
-import {tappable} from 'utils';
+// import {tappable} from 'utils';
 import {ValidatedComponent} from 'utils';
 import * as Color from 'styles/colors';
 import {LIST_ITEM_HEIGHT, LIST_ITEM_HEIGHT_BIG} from 'styles/dimensions';
+import * as sizes from 'styles/sizes';
 
 const borderStyle = `1px solid ${Color.GRAY_LIGHT}`;
 
+
 const clickableStyle = {
   cursor: 'pointer',
-  ':hover': {
-    background: Color.GRAY_VERY_LIGHT
+  [sizes.DESKTOP]: { // this is just a stupid shortcut (would like to have the ability
+                     // to question if touch is available. maybe in css4...
+    ':hover': {
+      background: Color.GRAY_VERY_LIGHT
+    }
   }
 };
 
@@ -35,7 +40,6 @@ export default class ListItem extends ValidatedComponent {
     onClick: PropTypes.func,
 
     // modifiers
-    noTouchColor: PropTypes.bool,
     borderTop: PropTypes.bool,
     big: PropTypes.bool,
     clickable: PropTypes.bool
@@ -49,28 +53,30 @@ export default class ListItem extends ValidatedComponent {
       borderTop,
       big,
       clickable,
-      noTouchColor
     } = this.props;
 
-    const style_ = {
-      ...baseStyle,
-      ...style,
-      ...(clickable ? clickableStyle : {}),
-      ...(borderTop ? {borderTop: borderStyle} : {}),
-      ...(big ? {height: LIST_ITEM_HEIGHT_BIG} : {})
-    };
+    const style_ = [
+      baseStyle,
+      style,
+      clickable && clickableStyle,
+      borderTop && {borderTop: borderStyle},
+      big && {height: LIST_ITEM_HEIGHT_BIG}
+    ];
 
+    return <li style={style_} onClick={onClick}>
+      {children}
+    </li>;
 
-    const activeStyle = {background: Color.GREEN_HOVER}; // for tapping
-    return tappable({
-      noTouchColor,
-      component: 'li',
-      name: 'ListItemTappable',
-      onClick,
-      style: style_,
-      activeStyle,
-      children
-    });
   }
 
 }
+
+    // return tappable({
+    //   noTouchColor,
+    //   component: 'li',
+    //   name: 'ListItemTappable',
+    //   onClick,
+    //   style: style_,
+    //   activeStyle,
+    //   children
+    // });

@@ -3,7 +3,7 @@ import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
 import {PAGE_WIDTH} from 'styles/dimensions';
-import {DESKTOP} from 'styles/sizes';
+import {BELOW_380_WIDTH} from 'styles/sizes';
 
 const style = {
   width: '95%',
@@ -17,7 +17,7 @@ const style = {
   boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.1)',
   marginTop: 8,
 
-  [DESKTOP]: {
+  [BELOW_380_WIDTH]: {
     marginTop: 24
   },
   marginBottom: 24

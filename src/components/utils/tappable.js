@@ -13,15 +13,15 @@ export default ({
 }) => {
     const rules = {[`.${name}-active`]: activeStyle};
 
-    return <div className='tappableWrapper'>
+    return noTouchColor ? React.createElement(component, {style, onClick}, children) :
+      <div className='tappableWrapper'>
       {!noTouchColor && <Style rules={rules}/>}
       <Tappable
         className={noTouchColor ? '' : name}
         classBase={noTouchColor ? '' : name}
         component={component}
         style={style}
-        onTap={onClick}
-        preventDefault>
+        onTap={onClick} >
 
         {children}
       </Tappable>
