@@ -1,15 +1,16 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import Radium from 'radium';
+import {tappable} from 'utils';
 import {ValidatedComponent} from 'utils';
-import {GRAY_LIGHT, GRAY_VERY_LIGHT} from 'styles/colors';
+import * as Color from 'styles/colors';
 import {LIST_ITEM_HEIGHT, LIST_ITEM_HEIGHT_BIG} from 'styles/dimensions';
 
-const borderStyle = `1px solid ${GRAY_LIGHT}`;
+const borderStyle = `1px solid ${Color.GRAY_LIGHT}`;
 
 const clickableStyle = {
   cursor: 'pointer',
   ':hover': {
-    background: GRAY_VERY_LIGHT
+    background: Color.GRAY_VERY_LIGHT
   }
 };
 
@@ -49,17 +50,24 @@ export default class ListItem extends ValidatedComponent {
       clickable
     } = this.props;
 
-    const style_ = [
-      baseStyle,
-      style,
-      clickable && clickableStyle,
-      borderTop && {borderTop: borderStyle},
-      big && {height: LIST_ITEM_HEIGHT_BIG}
-    ];
+    const style_ = {
+      ...baseStyle,
+      ...style,
+      ...(clickable ? clickableStyle : {}),
+      ...(borderTop ? {borderTop: borderStyle} : {}),
+      ...(big ? {height: LIST_ITEM_HEIGHT_BIG} : {})
+    };
 
-    return <li style={style_} onClick={onClick}>
-      {children}
-    </li>;
+
+    const activeStyle = onClick ? {background: Color.GREEN_HOVER} : {}; // for tapping
+    return tappable({
+      component: 'li',
+      name: 'ListItemTappable',
+      onClick,
+      style: style_,
+      activeStyle,
+      children
+    });
   }
 
 }
