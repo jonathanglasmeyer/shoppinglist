@@ -2,16 +2,22 @@ import React from 'react';
 import Tappable from 'react-tappable';
 import {Style} from 'radium';
 
-export default ({component, name, onClick, style, activeStyle, children}) => {
-    const rules = {
-      [`.${name}-active`]: activeStyle
-    };
+export default ({
+  component,
+  noTouchColor,
+  name,
+  onClick,
+  style,
+  activeStyle,
+  children
+}) => {
+    const rules = {[`.${name}-active`]: activeStyle};
 
     return <div className='tappableWrapper'>
-      <Style rules={rules}/>
+      {!noTouchColor && <Style rules={rules}/>}
       <Tappable
-        className={name}
-        classBase={name}
+        className={!noTouchColor && name}
+        classBase={!noTouchColor && name}
         component={component}
         style={style}
         onTap={onClick}

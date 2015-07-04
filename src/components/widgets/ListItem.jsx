@@ -35,6 +35,7 @@ export default class ListItem extends ValidatedComponent {
     onClick: PropTypes.func,
 
     // modifiers
+    noTouchColor: PropTypes.bool,
     borderTop: PropTypes.bool,
     big: PropTypes.bool,
     clickable: PropTypes.bool
@@ -47,7 +48,8 @@ export default class ListItem extends ValidatedComponent {
       style,
       borderTop,
       big,
-      clickable
+      clickable,
+      noTouchColor
     } = this.props;
 
     const style_ = {
@@ -59,8 +61,9 @@ export default class ListItem extends ValidatedComponent {
     };
 
 
-    const activeStyle = onClick ? {background: Color.GREEN_HOVER} : {}; // for tapping
+    const activeStyle = {background: Color.GREEN_HOVER}; // for tapping
     return tappable({
+      noTouchColor,
       component: 'li',
       name: 'ListItemTappable',
       onClick,

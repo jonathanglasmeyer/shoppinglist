@@ -10,9 +10,17 @@ export default class ShoppingListInput extends ValidatedComponent {
   render() {
     const {onSubmit} = this.props;
 
-    return <ListItem key={1}>
-      <Input onSubmit={onSubmit}/>
+    return <ListItem key={1} onClick={::this._focus} noTouchColor>
+      <Input onSubmit={onSubmit} inputRef={::this._inputRef}/>
     </ListItem>;
+  }
+
+  _inputRef(inputComponent) {
+    this.inputComponent = inputComponent;
+  }
+
+  _focus() {
+    this.inputComponent.focus();
   }
 
 }

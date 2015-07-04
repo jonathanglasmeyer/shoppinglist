@@ -15,24 +15,29 @@ const style = {
 export default class Input extends ValidatedComponent {
 
   static propTypes = {
+    inputRef: PropTypes.any,
     onSubmit: PropTypes.func.isRequired
   }
 
   render() {
-    const {onSubmit} = this.props;
+    const {onSubmit, inputRef} = this.props;
 
     return <form style={styleForm} onSubmit={::this._onSubmit}>
-      <input placeholder='New Article' style={style} type='text' ref='input' />
+      <input placeholder='New Article' style={style} type='text' ref={::this._inputRef} />
     </form>;
+  }
+
+  _inputRef(inputComponent) {
+    this.inputComponent = React.findDOMNode(inputComponent);
+    this.props.inputRef(this.inputComponent);
   }
 
   _onSubmit(e) {
     e.preventDefault();
-    const inputField = React.findDOMNode(this.refs.input);
-    const inputValue = inputField.value;
+    const inputValue = this.inputComponent.value;
 
     if (inputValue) {
-      inputField.value = '';
+      this.inputComponent.value = '';
       this.props.onSubmit(inputValue);
     }
   }
