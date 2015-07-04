@@ -16,8 +16,8 @@ export default ({
     return <div className='tappableWrapper'>
       {!noTouchColor && <Style rules={rules}/>}
       <Tappable
-        className={!noTouchColor && name}
-        classBase={!noTouchColor && name}
+        className={noTouchColor ? '' : name}
+        classBase={noTouchColor ? '' : name}
         component={component}
         style={style}
         onTap={onClick}
