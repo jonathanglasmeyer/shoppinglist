@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
-import {ListItem} from 'widgets';
+import {ListItem, SvgIcon} from 'widgets';
 
-import {GRAY_DISABLED_TEXT} from 'styles/colors';
+import {GRAY_DISABLED_TEXT, GREEN} from 'styles/colors';
 
 const doneStyle = {
   textDecoration: 'line-through',
@@ -20,8 +20,13 @@ export default class ShoppingListItem extends ValidatedComponent {
     const {item, onSetDone} = this.props;
     const style = item.done ? doneStyle : {};
 
+    const left = <SvgIcon 
+      color={GREEN}
+      icon={`checkbox-${item.done ? 'blank' : 'marked'}`} />;
+
     return <ListItem
       style={style}
+      left={left}
       onClick={() => onSetDone(item, !item.done)}
       clickable>
       {item.name}

@@ -27,7 +27,9 @@ module.exports = {
 
       {test: /\.less$/, loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!less-loader'},
 
-      {test: /\.(?:eot|ttf|svg|woff2?)$/, loader: 'file-loader?name=[path][name]-[hash:6].[ext]&context=assets'}
+      {test: /\.(?:eot|ttf|woff2?)$/, loader: 'file-loader?name=[path][name]-[hash:6].[ext]&context=assets'},
+
+      {test: /\.(svg)$/, loader: 'raw-loader'}
     ]
   },
   resolve: {

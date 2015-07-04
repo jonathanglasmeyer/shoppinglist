@@ -19,6 +19,13 @@ const clickableStyle = {
   }
 };
 
+const leftItemStyle = {
+  width: 56,
+  height: '100%',
+  display: 'flex', 
+  alignItems: 'center'
+};
+
 const baseStyle = {
   height: LIST_ITEM_HEIGHT,
   width: '100%',
@@ -39,6 +46,8 @@ export default class ListItem extends ValidatedComponent {
 
     onClick: PropTypes.func,
 
+    left: PropTypes.node,
+
     // modifiers
     borderTop: PropTypes.bool,
     big: PropTypes.bool,
@@ -48,6 +57,7 @@ export default class ListItem extends ValidatedComponent {
   render() {
     const {
       children,
+      left,
       onClick,
       style,
       borderTop,
@@ -58,12 +68,14 @@ export default class ListItem extends ValidatedComponent {
     const style_ = [
       baseStyle,
       style,
+
       clickable && clickableStyle,
       borderTop && {borderTop: borderStyle},
       big && {height: LIST_ITEM_HEIGHT_BIG}
     ];
 
     return <li style={style_} onClick={onClick}>
+      {left && <div style={leftItemStyle}>{left}</div>}
       {children}
     </li>;
 
