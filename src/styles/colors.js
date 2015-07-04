@@ -10,5 +10,5 @@ export const GRAY_SECONDARY_TEXT = 'rgba(0,0,0,.54)';
 export const GRAY_DISABLED_TEXT = 'rgba(0,0,0,.26)';
 
 export const GREEN = '#8bc34a';
-export const GREEN_HOVER = 'rgba(133, 219, 24, .07)';
+export const GREEN_HOVER = 'rgba(133, 219, 24, .03)';
 export const RED = '#e64a19';
