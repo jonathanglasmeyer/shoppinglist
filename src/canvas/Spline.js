@@ -92,7 +92,7 @@ export function buildSpline({intensity, padding, height, step}) {
 
 	for(let i = 0; i <= intensity; i++) {
 
-		let y = padding + Math.random() * (height - padding*2);
+		let y = padding + Math.random() * (height - padding * 2);
 
 
     // first and last y position have to be the same

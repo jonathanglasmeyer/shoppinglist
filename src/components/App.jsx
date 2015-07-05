@@ -45,7 +45,6 @@ export default class App extends ParseComponent {
         {/*<NavigationBar /> */}
         {page}
         <Footer
-          username={this.data.user.username}
           onLogout={::this._handleLogout}/>
 
       </div>;
