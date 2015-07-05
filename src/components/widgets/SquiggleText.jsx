@@ -67,9 +67,9 @@ export default class SquiggleText extends ValidatedComponent {
     const height = spanElement.offsetHeight;
     const color = "#222";
     const step = width / intensity;
-    const padding = height * 0.4;
+    const padding = height * 0.3;
     // const thickness = ~~(padding * 0.8);
-    const thickness = 3;
+    const thickness = 2;
     const canvas = buildCanvas(width, height);
     const canvasContext = canvas.getContext('2d');
     const spline = buildSpline({intensity, padding, height, step});
