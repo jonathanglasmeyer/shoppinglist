@@ -28,7 +28,7 @@ function buildSpline({intensity, padding, height, step}) {
 
 	for(var i = 0; i <= intensity; i++) {
 
-		let y = padding + Math.random() * (height - padding * 1.7);
+		let y = padding + Math.random() * (height - padding * 1.8);
 
 
     // first and last y position have to be the same
@@ -63,11 +63,11 @@ export default class SquiggleText extends ValidatedComponent {
   componentDidMount() {
     const spanElement = React.findDOMNode(this.refs.span);
     const width = spanElement.offsetWidth;
-    const intensity = Math.max(Math.round(width / 7), 1); // smaller: higher intens
+    const intensity = Math.max(Math.round(width / 15), 1); // smaller: higher intens
     const height = spanElement.offsetHeight;
     const color = "#222";
     const step = width / intensity;
-    const padding = height * 0.3;
+    const padding = height * 0.7;
     // const thickness = ~~(padding * 0.8);
     const thickness = 2;
     const canvas = buildCanvas(width, height);
