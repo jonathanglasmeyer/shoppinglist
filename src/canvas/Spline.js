@@ -1,3 +1,5 @@
+import {vector} from './helpers';
+
 /*eslint-disable */
 var Spline = function(options) {
 
@@ -83,3 +85,28 @@ Spline.prototype.draw = function(ctx,color,thickness){
 export default Spline;
 
 /*eslint-enable */
+
+export function buildSpline({intensity, padding, height, step}) {
+  const points = [];
+  var firstY;
+
+	for(let i = 0; i <= intensity; i++) {
+
+		let y = padding + Math.random() * (height - padding * 1.8);
+
+
+    // first and last y position have to be the same
+		if (i === 0) {
+      firstY = y;
+    }
+
+    // if last : set to first
+		if (i === intensity) {
+      y = firstY;
+    }
+
+		points[i] = vector({x: step * i, y});
+	}
+
+	return new Spline({points});
+}
