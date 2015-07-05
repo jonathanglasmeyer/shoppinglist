@@ -21,11 +21,11 @@ export default class SquiggleText extends ValidatedComponent {
 
     // parameters
     const width = spanElement.offsetWidth;
-    const intensity = Math.max(Math.round(width / 15), 1); // smaller: higher intens
+    const intensity = Math.max(Math.round(width / 25), 1); // smaller: higher intens
     const height = spanElement.offsetHeight;
     const color = '#222';
     const step = width / intensity;
-    const padding = height * 0.7;
+    const padding = height * 0.4;
     const thickness = 2; // in pixel
 
     const canvas = buildCanvas(width, height);
