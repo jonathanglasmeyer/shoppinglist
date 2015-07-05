@@ -2,9 +2,11 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-const styleForm = {
-  width: '100%'
-};
+const ENTER_KEY_CODE = 13;
+
+// const styleForm = {
+//   width: '100%'
+// };
 
 const style = {
   border: 'none',
@@ -13,7 +15,6 @@ const style = {
 
 @Radium
 export default class Input extends ValidatedComponent {
-
   static propTypes = {
     inputRef: PropTypes.any,
     onSubmit: PropTypes.func.isRequired
@@ -22,9 +23,12 @@ export default class Input extends ValidatedComponent {
   render() {
     const {onSubmit, inputRef} = this.props;
 
-    return <form style={styleForm} onSubmit={::this._onSubmit}>
-      <input placeholder='New Article' style={style} type='text' ref={::this._inputRef} />
-    </form>;
+    return <input
+      onKeyDown={::this._handleKeyDown}
+      placeholder='New Article'
+      style={style}
+      type='text'
+      ref={::this._inputRef} />;
   }
 
   _inputRef(inputComponent) {
@@ -32,13 +36,17 @@ export default class Input extends ValidatedComponent {
     this.props.inputRef(this.inputComponent);
   }
 
-  _onSubmit(e) {
-    e.preventDefault();
-    const inputValue = this.inputComponent.value;
-
-    if (inputValue) {
+  _onSubmit(value) {
+    if (value) {
       this.inputComponent.value = '';
-      this.props.onSubmit(inputValue);
+      this.props.onSubmit(value);
+    }
+  }
+
+  _handleKeyDown(event) {
+
+    if (event.keyCode === ENTER_KEY_CODE) {
+      this._onSubmit(event.target.value);
     }
   }
 

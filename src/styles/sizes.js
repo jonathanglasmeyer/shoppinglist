@@ -5,3 +5,4 @@ export const BELOW_380_WIDTH =
 
 export const DESKTOP =
   `@media only screen and (min-device-width: ${900}px)`;
+

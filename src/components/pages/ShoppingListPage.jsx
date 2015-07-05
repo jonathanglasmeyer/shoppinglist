@@ -6,11 +6,17 @@ import ShoppingList from './ShoppingListPage/ShoppingList.jsx';
 import {Page} from 'widgets';
 
 export default class ShoppingListPage extends ValidatedComponent {
+  static propTypes = {
+    onNotifyItemAdded: PropTypes.func.isRequired
+  }
 
   render() {
+
     return <Page>
-      <ShoppingList />
+      <ShoppingList onNotifyItemAdded={this.props.onNotifyItemAdded}/>
     </Page>;
   }
 
 }
+
+

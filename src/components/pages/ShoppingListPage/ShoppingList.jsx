@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ParseComponent from 'parse-react/class';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
@@ -28,8 +28,9 @@ const listStyle = {
 @Radium
 export default class ShoppingList extends ParseComponent {
   static propTypes = {
-
+    onNotifyItemAdded: PropTypes.func.isRequired
   }
+
 
   observe() {
     return {
@@ -71,6 +72,10 @@ export default class ShoppingList extends ParseComponent {
       done: false,
       user: Parse.User.current().toPlainObject()
     }).dispatch();
+
+    setTimeout(() => {
+      this.props.onNotifyItemAdded(name);
+    }, 100);
   }
 
   /**
