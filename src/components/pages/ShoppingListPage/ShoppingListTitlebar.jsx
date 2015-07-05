@@ -4,8 +4,10 @@ import Radium from 'radium';
 
 import {ListItem} from 'widgets';
 
-const style = {
-  fontSize: 20
+const titleStyle = {
+  fontSize: 22,
+  // fontFamily: 'Roboto Slab', // not sure ...
+  fontWeight: 400
 };
 
 @Radium
@@ -18,8 +20,8 @@ export default class ShoppingListTitlebar extends ValidatedComponent {
   render() {
     const {onSetAllDone, allDone} = this.props;
 
-    return <ListItem key={0} style={style} big>
-      Shopping List
+    return <ListItem key={0} big>
+      <h1 style={titleStyle}>Shopping List</h1>
     </ListItem>;
   }
 

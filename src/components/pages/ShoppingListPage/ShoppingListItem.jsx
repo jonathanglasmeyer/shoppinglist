@@ -20,7 +20,7 @@ export default class ShoppingListItem extends ValidatedComponent {
     const {item, onSetDone} = this.props;
     const style = item.done ? doneStyle : {};
 
-    const left = <SvgIcon 
+    const left = <SvgIcon
       color={GREEN}
       icon={`checkbox-${item.done ? 'blank' : 'marked'}`} />;
 
