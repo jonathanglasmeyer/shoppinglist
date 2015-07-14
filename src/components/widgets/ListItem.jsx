@@ -52,6 +52,7 @@ export default class ListItem extends ValidatedComponent {
     big: PropTypes.bool,
     clickable: PropTypes.bool,
     centerHorizontally: PropTypes.bool,
+    pullRight: PropTypes.bool,
     noBottomBorder: PropTypes.bool
   }
 
@@ -65,6 +66,7 @@ export default class ListItem extends ValidatedComponent {
       big,
       clickable,
       centerHorizontally,
+      pullRight,
       noBottomBorder
     } = this.props;
 
@@ -75,6 +77,7 @@ export default class ListItem extends ValidatedComponent {
       clickable && clickableStyle,
       borderTop && {borderTop: borderStyle},
       centerHorizontally && {justifyContent: 'center'},
+      pullRight && {justifyContent: 'flex-end'},
       big && {height: LIST_ITEM_HEIGHT_BIG},
       !noBottomBorder && {borderBottom: borderStyle}
     ];

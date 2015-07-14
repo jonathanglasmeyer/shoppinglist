@@ -1,8 +1,13 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
+import Radium from 'radium';
+
 import {buildSpline} from 'canvas/Spline';
 import {buildCanvas, getImageFromCanvas} from 'canvas/helpers';
 
+import * as colors from 'styles/colors';
+
+@Radium
 export default class SquiggleText extends ValidatedComponent {
   constructor(props) {
     super(props);
@@ -13,7 +18,8 @@ export default class SquiggleText extends ValidatedComponent {
 
   static propTypes = {
     children: PropTypes.string.isRequired,
-    squiggle: PropTypes.bool
+    squiggle: PropTypes.bool,
+    color: PropTypes.string
   }
 
   componentDidMount() {
@@ -23,7 +29,7 @@ export default class SquiggleText extends ValidatedComponent {
     const width = spanElement.offsetWidth;
     const intensity = Math.max(Math.round(width / 25), 1); // smaller: higher intens
     const height = spanElement.offsetHeight;
-    const color = '#222';
+    const color = colors.GRAY_DISABLED_TEXT;
     const step = width / intensity;
     const padding = height * 0.4;
     const thickness = 2; // in pixel
@@ -38,14 +44,15 @@ export default class SquiggleText extends ValidatedComponent {
   }
 
   render() {
-    const {children, squiggle} = this.props;
+    const {children, squiggle, color} = this.props;
     const {backgroundImage} = this.state;
 
     const style = squiggle ? {
+      color,
       display: 'inline',
       background: `url(${backgroundImage})`
 
-    } : {};
+    } : {color};
 
     return <span ref='span' style={style}>
       {children}

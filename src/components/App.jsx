@@ -12,10 +12,6 @@ const ThemeManager = new Styles.ThemeManager();
 // import NavigationBar from './App/NavigationBar.jsx';
 import Footer from './App/Footer.jsx';
 
-
-
-// import {GREEN, RED} from 'styles/colors';
-
 const style = {
   display: 'flex',
   minHeight: '100%',
@@ -52,7 +48,12 @@ export default class App extends ParseComponent {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    super.componentWillMount();
+    ThemeManager.setPalette({
+      accent1Color: Styles.Colors.teal500
+      // accent1Color: Colors.deepOrange500
+    });
   }
 
   render() {

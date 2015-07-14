@@ -4,6 +4,7 @@ import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import Radium from 'radium';
 import {all as _all} from 'lodash/collection';
+import {some as _some} from 'lodash/collection';
 
 import {Snackbar} from 'material-ui';
 import {SpinnerListItem} from 'widgets';
@@ -16,6 +17,9 @@ import ShoppingListFooter from './ShoppingListFooter.jsx';
 import {SHOPPINGLIST_ITEM} from 'constants';
 
 import {LIST_ITEM_HEIGHT} from 'styles/dimensions';
+
+const ACTION_UNDO_CREATE_ITEM = 'ACTION_UNDO_CREATE_ITEM';
+const ACTION_UNDO_CLEAN_ITEMS = 'ACTION_UNDO_CLEAN_ITEMS';
 
 const style = {
   minHeight: '100%'
@@ -30,6 +34,7 @@ const listStyle = {
 
 @Radium
 export default class ShoppingList extends ParseComponent {
+
   observe() {
     return {
       items: new Parse.Query(SHOPPINGLIST_ITEM)
@@ -40,13 +45,14 @@ export default class ShoppingList extends ParseComponent {
 
   render() {
     const isLoading = !!this.pendingQueries().length;
+    const isAnItemDone = _some(this.data.items, item => item.done);
 
     return <div style={style}>
       <Snackbar
         ref='snackbar'
         action='undo'
-        onActionTouchTap={::this._handleUndoCreate}
-        message={`Added ${this.state.name}`} />
+        onActionTouchTap={::this._snackbarExecuteAction}
+        message={this.snackbarMessage || ''} />
 
       <ul style={listStyle}>
 
@@ -64,10 +70,11 @@ export default class ShoppingList extends ParseComponent {
               key={item.id}
               item={item} />)}
 
-
       </ul>
 
-      <ShoppingListFooter onDeleteDone={::this._handleDeleteAllDone}/>
+      <ShoppingListFooter
+        isAnItemDone={isAnItemDone}
+        onDeleteDone={::this._handleDeleteAllDone} />
     </div>;
   }
 
@@ -81,7 +88,7 @@ export default class ShoppingList extends ParseComponent {
   _handleAddItem(name) {
 
     ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
-      name,
+      name: name.trim(),
       done: false,
       user: Parse.User.current().toPlainObject()
     }).dispatch().then(item => {
@@ -89,7 +96,7 @@ export default class ShoppingList extends ParseComponent {
     });
 
     setTimeout(() => {
-      this._handleNotifyItemAdded(name);
+      this._notifyItemAdded(name);
     }, 100);
   }
 
@@ -113,14 +120,48 @@ export default class ShoppingList extends ParseComponent {
   _handleDeleteAllDone() {
     const doneItems = this.data.items.filter(item => item.done);
     doneItems.forEach(item => ParseReact.Mutation.Destroy(item).dispatch());
+
+    this.cleanedItems = doneItems;
+    this._notifyItemsCleaned();
   }
 
-  _handleNotifyItemAdded(name) {
-    this.setState({name});
+  _showSnackbar() {
     this.refs.snackbar.show();
-    setTimeout(() => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(() => {
       this.refs.snackbar.dismiss();
     }, 5000);
+  }
+
+  _notifyItemAdded(name) {
+    this.setState({name});
+    this.snackbarMessage = `Added ${this.state.name}`;
+    this.snackbarCurrentAction = ACTION_UNDO_CREATE_ITEM;
+    this._showSnackbar();
+  }
+
+  _notifyItemsCleaned() {
+    this.snackbarCurrentAction = ACTION_UNDO_CLEAN_ITEMS;
+    this.snackbarMessage = 'Cleaned up done items';
+    this._showSnackbar();
+  }
+
+  _snackbarExecuteAction() {
+    if (this.snackbarCurrentAction === ACTION_UNDO_CREATE_ITEM) {
+      this._handleUndoCreate();
+    } else {
+      this._handleUndoClean();
+    }
+  }
+
+  _handleUndoClean() {
+    this.cleanedItems.map(({name, done, user}) => {
+      ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
+        name, done, user
+      }).dispatch();
+    });
   }
 
   _handleUndoCreate() {

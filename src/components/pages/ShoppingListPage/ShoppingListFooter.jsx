@@ -3,6 +3,8 @@ import Radium from 'radium';
 import {ValidatedComponent} from 'utils';
 import {ListItem} from 'widgets';
 
+import {FlatButton} from 'material-ui';
+
 const style = {
   position: 'absolute',
   bottom: 0,
@@ -12,15 +14,20 @@ const style = {
 @Radium
 export default class ShoppingListFooter extends ValidatedComponent {
   static propTypes = {
-    onDeleteDone: PropTypes.func.isRequired
+    onDeleteDone: PropTypes.func.isRequired,
+    isAnItemDone: PropTypes.bool.isRequired
   }
 
   render() {
-    const {onDeleteDone} = this.props;
+    const {onDeleteDone, isAnItemDone} = this.props;
 
-    return <ListItem style={style}>
-      <a onClick={onDeleteDone}>Archive done items</a>
+    return <ListItem style={style} pullRight>
+      <FlatButton
+        label='CLEAN'
+        primary disabled={!isAnItemDone}
+        onClick={onDeleteDone}/>
     </ListItem>;
+      // <a onClick={onDeleteDone}>Archive done items</a>
   }
 
 }
