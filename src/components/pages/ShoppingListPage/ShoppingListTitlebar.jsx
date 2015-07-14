@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {ListItem} from 'widgets';
+import {Checkbox, ListItem} from 'widgets';
 
 const titleStyle = {
   fontSize: 22,
@@ -20,8 +20,15 @@ export default class ShoppingListTitlebar extends ValidatedComponent {
   render() {
     const {onSetAllDone, allDone} = this.props;
 
-    return <ListItem key={0} big>
+    return <ListItem
+      key={0} 
+      big
+      onClick={onSetAllDone}
+      clickable
+      left={<Checkbox checked={allDone} />}>
+
       <h1 style={titleStyle}>Shopping List</h1>
+
     </ListItem>;
   }
 

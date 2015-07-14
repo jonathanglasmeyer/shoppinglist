@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
-import {ListItem, SquiggleText, SvgIcon} from 'widgets';
-import {Styles} from 'material-ui';
+import {Checkbox, ListItem, SquiggleText} from 'widgets';
 
 import * as colors from 'styles/colors';
 
@@ -15,10 +14,8 @@ export default class ShoppingListItem extends ValidatedComponent {
     const {item, onSetDone} = this.props;
     const textColor = item.done ? colors.GRAY_DISABLED_TEXT : colors.TEXT;
 
-    const svgIconName = `checkbox-${item.done ? 'marked' : 'blank'}`;
-    const svgIconColor = item.done ? Styles.Colors.teal500 : undefined;
     return <ListItem
-      left={<SvgIcon color={svgIconColor} icon={svgIconName} />}
+      left={<Checkbox checked={item.done} />}
       onClick={() => onSetDone(item, !item.done)}
       clickable>
 

@@ -4,3 +4,4 @@ export Input from './Input.jsx';
 export SvgIcon from './SvgIcon.jsx';
 export SquiggleText from './SquiggleText.jsx';
 export SpinnerListItem from './SpinnerListItem.jsx';
+export Checkbox from './Checkbox.jsx';
