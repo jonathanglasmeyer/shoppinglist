@@ -1,9 +1,12 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import ParseComponent from 'parse-react/class';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import Radium from 'radium';
 import {all as _all} from 'lodash/collection';
+
+import {Snackbar} from 'material-ui';
+import {SpinnerListItem} from 'widgets';
 
 import ShoppingListItem from './ShoppingListItem.jsx';
 import ShoppingListInput from './ShoppingListInput.jsx';
@@ -27,11 +30,6 @@ const listStyle = {
 
 @Radium
 export default class ShoppingList extends ParseComponent {
-  static propTypes = {
-    onNotifyItemAdded: PropTypes.func.isRequired
-  }
-
-
   observe() {
     return {
       items: new Parse.Query(SHOPPINGLIST_ITEM)
@@ -41,19 +39,34 @@ export default class ShoppingList extends ParseComponent {
   }
 
   render() {
+    const isLoading = !!this.pendingQueries().length;
 
     return <div style={style}>
+      <Snackbar
+        ref='snackbar'
+        action='undo'
+        onActionTouchTap={::this._handleUndoCreate}
+        message={`Added ${this.state.name}`} />
+
       <ul style={listStyle}>
+
         <ShoppingListTitlebar
           allDone={::this._allDone()}
           onSetAllDone={::this._handleSetAllDone} />
+
         <ShoppingListInput onSubmit={::this._handleAddItem}/>
+
+        {isLoading && <SpinnerListItem />}
+
         {this.data.items.map(item =>
             <ShoppingListItem
               onSetDone={::this._handleSetDone}
               key={item.id}
               item={item} />)}
+
+
       </ul>
+
       <ShoppingListFooter onDeleteDone={::this._handleDeleteAllDone}/>
     </div>;
   }
@@ -71,10 +84,12 @@ export default class ShoppingList extends ParseComponent {
       name,
       done: false,
       user: Parse.User.current().toPlainObject()
-    }).dispatch();
+    }).dispatch().then(item => {
+      this.lastCreatedItem = item;
+    });
 
     setTimeout(() => {
-      this.props.onNotifyItemAdded(name);
+      this._handleNotifyItemAdded(name);
     }, 100);
   }
 
@@ -98,6 +113,18 @@ export default class ShoppingList extends ParseComponent {
   _handleDeleteAllDone() {
     const doneItems = this.data.items.filter(item => item.done);
     doneItems.forEach(item => ParseReact.Mutation.Destroy(item).dispatch());
+  }
+
+  _handleNotifyItemAdded(name) {
+    this.setState({name});
+    this.refs.snackbar.show();
+    setTimeout(() => {
+      this.refs.snackbar.dismiss();
+    }, 5000);
+  }
+
+  _handleUndoCreate() {
+    ParseReact.Mutation.Destroy(this.lastCreatedItem).dispatch();
   }
 
 }

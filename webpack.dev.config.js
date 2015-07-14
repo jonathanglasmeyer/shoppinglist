@@ -17,6 +17,9 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: 'http://' + hostname + ':' + port + '/public/'
   },
+  eslint: {
+    emitWarning: true
+  },
   module: {
     preLoaders: [
       {test: /\.jsx?$/, loader: "eslint-loader", exclude: /node_modules/}

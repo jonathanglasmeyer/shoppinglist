@@ -6,7 +6,7 @@ import {ListItem} from 'widgets';
 
 const titleStyle = {
   fontSize: 22,
-  // fontFamily: 'Roboto Slab', // not sure ...
+  fontFamily: 'Montserrat, sans-serif', // not sure ...
   fontWeight: 400
 };
 

@@ -1,10 +1,12 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
+
+
 import {Parse} from 'parse';
 import Radium from 'radium';
 import ParseComponent from 'parse-react/class';
 import ParseReact from 'parse-react';
 import {ShoppingListPage} from 'pages';
-import {Snackbar, Styles} from 'material-ui';
+import {Styles} from 'material-ui';
 const ThemeManager = new Styles.ThemeManager();
 
 // import NavigationBar from './App/NavigationBar.jsx';
@@ -54,7 +56,7 @@ export default class App extends ParseComponent {
   }
 
   render() {
-    const page = <ShoppingListPage onNotifyItemAdded={::this._handleNotifyItemAdded}/>;
+    const page = <ShoppingListPage />;
 
     // if user is logged in
     if (this.data.user) {
@@ -62,9 +64,6 @@ export default class App extends ParseComponent {
       return <div style={style}>
         {/*<NavigationBar /> */}
         {page}
-        <Snackbar
-          ref='snackbar'
-          message={`Added ${this.state.name}.`} />
         <Footer
           onLogout={::this._handleLogout}/>
 
@@ -139,11 +138,5 @@ export default class App extends ParseComponent {
     Parse.User.logOut();
   }
 
-  _handleNotifyItemAdded(name) {
-    this.setState({name});
-    this.refs.snackbar.show();
-    setTimeout(() => {
-      this.refs.snackbar.dismiss();
-    }, 2000);
-  }
+
 }

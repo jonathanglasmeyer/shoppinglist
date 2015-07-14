@@ -32,7 +32,6 @@ const baseStyle = {
   cursor: 'default',
   listStyleType: 'none',
   padding: '0 16px',
-  borderBottom: borderStyle,
   listStylePosition: 'inside',
   display: 'flex',
   alignItems: 'center'
@@ -51,7 +50,9 @@ export default class ListItem extends ValidatedComponent {
     // modifiers
     borderTop: PropTypes.bool,
     big: PropTypes.bool,
-    clickable: PropTypes.bool
+    clickable: PropTypes.bool,
+    centerHorizontally: PropTypes.bool,
+    noBottomBorder: PropTypes.bool
   }
 
   render() {
@@ -63,6 +64,8 @@ export default class ListItem extends ValidatedComponent {
       borderTop,
       big,
       clickable,
+      centerHorizontally,
+      noBottomBorder
     } = this.props;
 
     const style_ = [
@@ -71,7 +74,9 @@ export default class ListItem extends ValidatedComponent {
 
       clickable && clickableStyle,
       borderTop && {borderTop: borderStyle},
-      big && {height: LIST_ITEM_HEIGHT_BIG}
+      centerHorizontally && {justifyContent: 'center'},
+      big && {height: LIST_ITEM_HEIGHT_BIG},
+      !noBottomBorder && {borderBottom: borderStyle}
     ];
 
     return <li style={style_} onClick={onClick}>
