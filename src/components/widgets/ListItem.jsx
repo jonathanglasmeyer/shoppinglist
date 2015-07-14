@@ -20,7 +20,7 @@ const clickableStyle = {
 };
 
 const leftItemStyle = {
-  width: 56,
+  minWidth: 56,
   height: '100%',
   display: 'flex',
   alignItems: 'center'

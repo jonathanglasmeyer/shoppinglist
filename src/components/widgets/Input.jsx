@@ -17,15 +17,16 @@ const style = {
 export default class Input extends ValidatedComponent {
   static propTypes = {
     inputRef: PropTypes.any,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    placeholder: PropTypes.string
   }
 
   render() {
-    const {onSubmit, inputRef} = this.props;
+    const {onSubmit, inputRef, placeholder} = this.props;
 
     return <input
       onKeyDown={::this._handleKeyDown}
-      placeholder='New Article'
+      placeholder={placeholder}
       style={style}
       type='text'
       ref={::this._inputRef} />;

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
-import {Input, ListItem} from 'widgets';
+import {Input, ListItem, SvgIcon} from 'widgets';
 
 export default class ShoppingListInput extends ValidatedComponent {
   static propTypes = {
@@ -10,8 +10,15 @@ export default class ShoppingListInput extends ValidatedComponent {
   render() {
     const {onSubmit} = this.props;
 
-    return <ListItem key={1} onClick={::this._focus} noTouchColor>
-      <Input onSubmit={onSubmit} inputRef={::this._inputRef}/>
+    return <ListItem
+      left={<SvgIcon icon='pencil' />}
+      key={1}
+      onClick={::this._focus}
+      noTouchColor>
+      <Input
+        placeholder='Article'
+        onSubmit={onSubmit}
+        inputRef={::this._inputRef} />
     </ListItem>;
   }
 

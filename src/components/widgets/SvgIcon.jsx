@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
 import {ValidatedComponent} from 'utils';
+import * as colors from 'styles/colors';
 
 const style = {
   width: 24,
-  height: 24,
+  height: 24
 };
 
 export default class SvgIcon extends ValidatedComponent {
@@ -13,7 +14,7 @@ export default class SvgIcon extends ValidatedComponent {
   }
 
   render() {
-    const {color='#000', icon} = this.props;
+    const {color=colors.GRAY_SECONDARY_TEXT, icon} = this.props;
 
     const rawIcon = require(`assets/${icon}.svg`);
     return <svg
