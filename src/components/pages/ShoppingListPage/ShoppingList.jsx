@@ -7,7 +7,7 @@ import {all as _all} from 'lodash/collection';
 import {some as _some} from 'lodash/collection';
 
 import {Snackbar} from 'material-ui';
-import {SpinnerListItem} from 'widgets';
+import {Spinner, List} from 'widgets';
 
 import ShoppingListItem from './ShoppingListItem.jsx';
 import ShoppingListInput from './ShoppingListInput.jsx';
@@ -16,7 +16,6 @@ import ShoppingListFooter from './ShoppingListFooter.jsx';
 
 import {SHOPPINGLIST_ITEM} from 'constants';
 
-import {LIST_ITEM_HEIGHT} from 'styles/dimensions';
 
 const SNACKBAR_UNDO_CREATE = 'SNACKBAR_UNDO_CREATE';
 const SNACKBAR_UNDO_CLEAN = 'SNACKBAR_UNDO_CLEAN';
@@ -25,11 +24,6 @@ const style = {
   minHeight: '100%'
   // display: 'flex',
   // flexDirection: 'column'
-};
-
-const listStyle = {
-  flex: '1 0 auto',
-  marginBottom: LIST_ITEM_HEIGHT + 8
 };
 
 @Radium
@@ -61,24 +55,24 @@ export default class ShoppingList extends ParseComponent {
         onActionTouchTap={::this._handleUndoClean}
         message={'Cleaned up done items'} />
 
-      <ul style={listStyle}>
+      <List>
 
         <ShoppingListTitlebar
           itemsExist={itemsExist}
           allDone={::this._allDone()}
           onSetAllDone={::this._handleSetAllDone} />
 
-        <ShoppingListInput onSubmit={::this._handleAddItem}/>
+        {!isLoading && <ShoppingListInput onSubmit={::this._handleAddItem}/>}
 
-        {isLoading && <SpinnerListItem />}
+        {isLoading && <Spinner />}
 
-        {this.data.items.map(item =>
+        {!isLoading && this.data.items.map(item =>
             <ShoppingListItem
               onSetDone={::this._handleSetDone}
               key={item.id}
               item={item} />)}
 
-      </ul>
+      </List>
 
       <ShoppingListFooter
         isAnItemDone={isAnItemDone}

@@ -14,6 +14,7 @@ import Footer from './App/Footer.jsx';
 
 const style = {
   display: 'flex',
+  position: 'relative',
   minHeight: '100%',
   flexDirection: 'column',
   alignItems: 'center'
