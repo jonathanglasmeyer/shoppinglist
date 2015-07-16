@@ -64,7 +64,6 @@ export default class App extends ParseComponent {
     if (this.data.user) {
 
       return <div style={style}>
-        {/*<NavigationBar /> */}
         {page}
         <Footer
           onLogout={::this._handleLogout}/>
