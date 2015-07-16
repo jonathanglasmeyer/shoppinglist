@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
-import {SvgIcon} from 'widgets';
 
 const style = {
   position: 'absolute',
