@@ -22,7 +22,7 @@ export default class Footer extends ValidatedComponent {
     const {onLogout} = this.props;
 
     return <footer style={style}>
-      <a onClick={onLogout}>Log out</a>
+      <a onClick={onLogout} style={{fontSize: 14}}>Logout</a>
     </footer>;
   }
 
