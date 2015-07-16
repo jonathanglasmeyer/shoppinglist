@@ -20,6 +20,7 @@ const clickableStyle = {
 };
 
 const leftItemStyle = {
+  paddingLeft: 16,
   minWidth: 56,
   height: '100%',
   display: 'flex',
@@ -31,7 +32,7 @@ const baseStyle = {
   width: '100%',
   cursor: 'default',
   listStyleType: 'none',
-  padding: '0 16px',
+  paddingRight: 16,
   listStylePosition: 'inside',
   display: 'flex',
   alignItems: 'center'
@@ -44,6 +45,7 @@ export default class ListItem extends ValidatedComponent {
     style: PropTypes.object,
 
     onClick: PropTypes.func,
+    onClickLeft: PropTypes.func,
 
     left: PropTypes.node,
 
@@ -61,6 +63,7 @@ export default class ListItem extends ValidatedComponent {
       children,
       left,
       onClick,
+      onClickLeft,
       style,
       borderTop,
       big,
@@ -82,8 +85,17 @@ export default class ListItem extends ValidatedComponent {
       !noBottomBorder && {borderBottom: borderStyle}
     ];
 
+    const leftItemStyle_ = [
+      leftItemStyle,
+      onClickLeft && {cursor: 'pointer'}
+    ];
+
     return <li style={style_} onClick={onClick}>
-      {left && <div style={leftItemStyle}>{left}</div>}
+      {left && <div
+        onClick={onClickLeft}
+        style={leftItemStyle_}>
+        {left}
+      </div>}
       {children}
     </li>;
 

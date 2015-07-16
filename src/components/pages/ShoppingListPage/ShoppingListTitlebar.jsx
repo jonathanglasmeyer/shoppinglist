@@ -14,18 +14,19 @@ const titleStyle = {
 export default class ShoppingListTitlebar extends ValidatedComponent {
   static propTypes = {
     onSetAllDone: PropTypes.func.isRequired,
-    allDone: PropTypes.bool.isRequired
+    allDone: PropTypes.bool.isRequired,
+    itemsExist: PropTypes.bool.isRequired,
   }
 
   render() {
-    const {onSetAllDone, allDone} = this.props;
+    const {onSetAllDone, allDone, itemsExist} = this.props;
 
     return <ListItem
-      key={0} 
+      key={0}
       big
       onClick={onSetAllDone}
       clickable
-      left={<Checkbox checked={allDone} />}>
+      left={<Checkbox checked={itemsExist && allDone} disabled={!itemsExist} />}>
 
       <h1 style={titleStyle}>Shopping List</h1>
 

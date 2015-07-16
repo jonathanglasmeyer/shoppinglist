@@ -46,6 +46,7 @@ export default class ShoppingList extends ParseComponent {
   render() {
     const isLoading = !!this.pendingQueries().length;
     const isAnItemDone = _some(this.data.items, item => item.done);
+    const itemsExist = !!this.data.items.length;
 
     return <div style={style}>
       <Snackbar
@@ -57,6 +58,7 @@ export default class ShoppingList extends ParseComponent {
       <ul style={listStyle}>
 
         <ShoppingListTitlebar
+          itemsExist={itemsExist}
           allDone={::this._allDone()}
           onSetAllDone={::this._handleSetAllDone} />
 
