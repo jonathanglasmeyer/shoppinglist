@@ -2,13 +2,7 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {Checkbox, ListItem} from 'widgets';
-
-const titleStyle = {
-  fontSize: 22,
-  fontFamily: 'Montserrat, sans-serif', // not sure ...
-  fontWeight: 400
-};
+import {Checkbox, Titlebar} from 'widgets';
 
 @Radium
 export default class ShoppingListTitlebar extends ValidatedComponent {
@@ -21,16 +15,13 @@ export default class ShoppingListTitlebar extends ValidatedComponent {
   render() {
     const {onSetAllDone, allDone, itemsExist} = this.props;
 
-    return <ListItem
-      key={0}
-      big
+    return <Titlebar
       onClick={onSetAllDone}
-      clickable
-      left={<Checkbox checked={itemsExist && allDone} disabled={!itemsExist} />}>
-
-      <h1 style={titleStyle}>Shopping List</h1>
-
-    </ListItem>;
+      title='Shopping List'
+      left={
+        <Checkbox
+          checked={itemsExist && allDone}
+          disabled={!itemsExist} /> } />;
   }
 
 }

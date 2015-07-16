@@ -3,7 +3,11 @@ import Radium from 'radium';
 // import {tappable} from 'utils';
 import {ValidatedComponent} from 'utils';
 import * as Color from 'styles/colors';
-import {LIST_ITEM_HEIGHT, LIST_ITEM_HEIGHT_BIG} from 'styles/dimensions';
+import {
+  LIST_ITEM_HEIGHT,
+  LIST_ITEM_HEIGHT_BIG,
+  LIST_ITEM_HEIGHT_HUGE
+} from 'styles/dimensions';
 import * as sizes from 'styles/sizes';
 
 const borderStyle = `1px solid ${Color.GRAY_LIGHT}`;
@@ -52,6 +56,7 @@ export default class ListItem extends ValidatedComponent {
     // modifiers
     borderTop: PropTypes.bool,
     big: PropTypes.bool,
+    huge: PropTypes.bool,
     clickable: PropTypes.bool,
     centerHorizontally: PropTypes.bool,
     pullRight: PropTypes.bool,
@@ -67,6 +72,7 @@ export default class ListItem extends ValidatedComponent {
       style,
       borderTop,
       big,
+      huge,
       clickable,
       centerHorizontally,
       pullRight,
@@ -77,11 +83,13 @@ export default class ListItem extends ValidatedComponent {
       baseStyle,
       style,
 
+      !left && {paddingLeft: 16},
       clickable && clickableStyle,
       borderTop && {borderTop: borderStyle},
       centerHorizontally && {justifyContent: 'center'},
       pullRight && {justifyContent: 'flex-end'},
       big && {height: LIST_ITEM_HEIGHT_BIG},
+      huge && {height: LIST_ITEM_HEIGHT_HUGE},
       !noBottomBorder && {borderBottom: borderStyle}
     ];
 

@@ -5,7 +5,7 @@ import {Parse} from 'parse';
 import Radium from 'radium';
 import ParseComponent from 'parse-react/class';
 import ParseReact from 'parse-react';
-import {ShoppingListPage} from 'pages';
+import {MainPage} from 'pages';
 import {Styles} from 'material-ui';
 const ThemeManager = new Styles.ThemeManager();
 
@@ -58,7 +58,7 @@ export default class App extends ParseComponent {
   }
 
   render() {
-    const page = <ShoppingListPage />;
+    const page = <MainPage />;
 
     // if user is logged in
     if (this.data.user) {

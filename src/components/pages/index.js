@@ -1,1 +1,1 @@
-export ShoppingListPage from './ShoppingListPage.jsx';
+export MainPage from './MainPage.jsx';
