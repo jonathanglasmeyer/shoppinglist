@@ -40,12 +40,12 @@ export default class ShoppingListInput extends ValidatedComponent {
     if (event.keyCode === ENTER_KEY_CODE) {
       const {value} = event.target;
       this.inputText = value;
-      this._onSubmit(value);
+      this._submit();
     }
   }
 
   _submit() {
-    const value = this.inputComponent.value
+    const value = this.inputComponent.value;
     if (value) {
       this.inputComponent.value = '';
       this.props.onSubmit(value);

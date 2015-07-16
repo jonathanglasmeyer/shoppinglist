@@ -18,8 +18,8 @@ import {SHOPPINGLIST_ITEM} from 'constants';
 
 import {LIST_ITEM_HEIGHT} from 'styles/dimensions';
 
-const ACTION_UNDO_CREATE_ITEM = 'ACTION_UNDO_CREATE_ITEM';
-const ACTION_UNDO_CLEAN_ITEMS = 'ACTION_UNDO_CLEAN_ITEMS';
+const SNACKBAR_UNDO_CREATE = 'SNACKBAR_UNDO_CREATE';
+const SNACKBAR_UNDO_CLEAN = 'SNACKBAR_UNDO_CLEAN';
 
 const style = {
   minHeight: '100%'
@@ -50,10 +50,16 @@ export default class ShoppingList extends ParseComponent {
 
     return <div style={style}>
       <Snackbar
-        ref='snackbar'
+        ref={SNACKBAR_UNDO_CREATE}
         action='undo'
-        onActionTouchTap={::this._snackbarExecuteAction}
-        message={this.snackbarMessage || ''} />
+        onActionTouchTap={::this._handleUndoCreate}
+        message={this.name ? `Added ${this.name}` : ''} />
+
+      <Snackbar
+        ref={SNACKBAR_UNDO_CLEAN}
+        action='undo'
+        onActionTouchTap={::this._handleUndoClean}
+        message={'Cleaned up done items'} />
 
       <ul style={listStyle}>
 
@@ -127,38 +133,31 @@ export default class ShoppingList extends ParseComponent {
     this._notifyItemsCleaned();
   }
 
-  _showSnackbar() {
-    this.refs.snackbar.show();
-    if (this.timeout) {
-      clearTimeout(this.timeout);
+  _showSnackbar(ref) {
+    const snackbar = this.refs[ref];
+    snackbar.show();
+
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
-    this.timeout = setTimeout(() => {
-      this.refs.snackbar.dismiss();
+
+    this.timer = setTimeout(() => {
+      snackbar.dismiss();
     }, 5000);
   }
 
   _notifyItemAdded(name) {
-    this.setState({name});
-    this.snackbarMessage = `Added ${this.state.name}`;
-    this.snackbarCurrentAction = ACTION_UNDO_CREATE_ITEM;
-    this._showSnackbar();
+    this.name = name;
+    this._showSnackbar(SNACKBAR_UNDO_CREATE);
   }
 
   _notifyItemsCleaned() {
-    this.snackbarCurrentAction = ACTION_UNDO_CLEAN_ITEMS;
-    this.snackbarMessage = 'Cleaned up done items';
-    this._showSnackbar();
-  }
-
-  _snackbarExecuteAction() {
-    if (this.snackbarCurrentAction === ACTION_UNDO_CREATE_ITEM) {
-      this._handleUndoCreate();
-    } else {
-      this._handleUndoClean();
-    }
+    this._showSnackbar(SNACKBAR_UNDO_CLEAN);
   }
 
   _handleUndoClean() {
+    this.refs[SNACKBAR_UNDO_CLEAN].dismiss();
+
     this.cleanedItems.map(({name, done, user}) => {
       ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
         name, done, user
@@ -167,6 +166,7 @@ export default class ShoppingList extends ParseComponent {
   }
 
   _handleUndoCreate() {
+    this.refs[SNACKBAR_UNDO_CREATE].dismiss();
     ParseReact.Mutation.Destroy(this.lastCreatedItem).dispatch();
   }
 

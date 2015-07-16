@@ -5,7 +5,7 @@ import Radium from 'radium';
 import {buildSpline} from 'canvas/Spline';
 import {buildCanvas, getImageFromCanvas} from 'canvas/helpers';
 
-import * as colors from 'styles/colors';
+// import * as colors from 'styles/colors';
 
 @Radium
 export default class SquiggleText extends ValidatedComponent {
@@ -27,9 +27,9 @@ export default class SquiggleText extends ValidatedComponent {
 
     // parameters
     const width = spanElement.offsetWidth;
-    const intensity = Math.max(Math.round(width / 25), 1); // smaller: higher intens
+    const intensity = Math.max(Math.round(width / 15), 1); // smaller: higher intens
     const height = spanElement.offsetHeight;
-    const color = colors.GRAY_DISABLED_TEXT;
+    const color = '#777';
     const step = width / intensity;
     const padding = height * 0.4;
     const thickness = 2; // in pixel

@@ -15,7 +15,6 @@ const style = {
 @Radium
 export default class Input extends ValidatedComponent {
   static propTypes = {
-    inputRef: PropTypes.any,
     onKeyDown: PropTypes.func.isRequired,
     placeholder: PropTypes.string
   }
