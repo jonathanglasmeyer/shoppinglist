@@ -9,3 +9,5 @@ export SquiggleText from './SquiggleText.jsx';
 export Spinner from './Spinner.jsx';
 export Checkbox from './Checkbox.jsx';
 export Titlebar from './Titlebar.jsx';
+export Image from './Image.jsx';
+export Title from './Title.jsx';

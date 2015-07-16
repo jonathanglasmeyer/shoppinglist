@@ -7,13 +7,14 @@ import {Titlebar} from 'widgets';
 @Radium
 export default class RecipeTitlebar extends ValidatedComponent {
   static propTypes = {
-
+    title: PropTypes.string.isRequired
   }
 
   render() {
+    const {title} = this.props;
 
     return <Titlebar huge
-      title='Incredible Mac ‘n’ Cheese, four ways' />;
+      title={title} />;
   }
 
 }

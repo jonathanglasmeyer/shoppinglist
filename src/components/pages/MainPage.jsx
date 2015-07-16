@@ -17,11 +17,15 @@ export default class MainPage extends ValidatedComponent {
       </Card>
 
       <Card>
-      <ListInputItem iconName='search' placeholder='Find Recipe' />
+        <ListInputItem
+          iconName='search'
+          onSubmit={() => {}}
+          placeholder='Find Recipe' />
       </Card>
 
       <Card>
-        <Recipe />
+        <Recipe
+          title='Incredible Mac ‘n’ Cheese, four ways' />
       </Card>
     </Page>;
   }
