@@ -4,12 +4,15 @@ import Radium from 'radium';
 
 import {Title} from 'widgets';
 
+const BORDER_RADIUS = 3;
+
 const gradientBase = {
   position: 'absolute',
   top: '30%',
   left: 0,
   right: 0,
   bottom: 0,
+  borderRadius: BORDER_RADIUS
   // width: '100%',
   // height: '100%',
 };
@@ -26,29 +29,27 @@ const base = {
   width: '100%',
   height: '100%',
 
-  borderTopLeftRadius: 2,
-  borderTopRightRadius: 2
+  borderRadius: BORDER_RADIUS,
 };
 
 const titleStyle = {
   position: 'absolute',
   bottom: 16,
-  left: 16
+  left: 16,
+  right: 16
 };
 
 
 @Radium
-export default class Image extends ValidatedComponent {
+export default class TitleImage extends ValidatedComponent {
   static propTypes = {
     path: PropTypes.string.isRequired,
     yOffset: PropTypes.number,
     title: PropTypes.string,
-    gradient: PropTypes.bool
   }
 
   render() {
-    const {path, yOffset=0, title, gradient} = this.props;
-    console.info('[Image.jsx] ', gradient);
+    const {path, yOffset=0, title} = this.props;
 
     const style = [
       base,
@@ -57,7 +58,7 @@ export default class Image extends ValidatedComponent {
 
     const gradientStyle = [
       gradientBase,
-      gradient && {background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,.8) 100%)'}
+      {background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,.8) 100%)'}
     ];
 
     return <div style={styleWrapper}>

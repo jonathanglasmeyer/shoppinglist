@@ -1,5 +1,6 @@
 export ListItem from './ListItem.jsx';
 export ListInputItem from './ListInputItem.jsx';
+export ListItemFooter from './ListItemFooter.jsx';
 export List from './List.jsx';
 export Page from './Page.jsx';
 export Card from './Card.jsx';
@@ -9,5 +10,6 @@ export SquiggleText from './SquiggleText.jsx';
 export Spinner from './Spinner.jsx';
 export Checkbox from './Checkbox.jsx';
 export Titlebar from './Titlebar.jsx';
-export Image from './Image.jsx';
+export TitleImage from './TitleImage.jsx';
 export Title from './Title.jsx';
+export SearchInput from './SearchInput.jsx';

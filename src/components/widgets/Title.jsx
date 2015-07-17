@@ -12,15 +12,16 @@ const base = {
 export default class Title extends ValidatedComponent {
   static propTypes = {
     children: PropTypes.string.isRequired,
-    color: PropTypes.string
+    color: PropTypes.string,
+    glow: PropTypes.bool
   }
 
   render() {
-    const {children, color} = this.props;
+    const {children, color, glow} = this.props;
     const style = [
       base,
       color && {color},
-      {textShadow: '0 1px 0 rgba(0,0,0,.3)'}
+      glow && {textShadow: '0 1px 0 rgba(0,0,0,.2)'}
     ];
 
     return <h1 style={style}>{children}</h1>;

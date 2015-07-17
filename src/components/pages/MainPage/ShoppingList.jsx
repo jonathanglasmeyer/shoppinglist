@@ -7,7 +7,7 @@ import {all as _all} from 'lodash/collection';
 import {some as _some} from 'lodash/collection';
 
 import {Snackbar} from 'material-ui';
-import {Spinner, List} from 'widgets';
+import {Card, Spinner, List} from 'widgets';
 
 import ShoppingListItem from './ShoppingListItem.jsx';
 import ShoppingListInput from './ShoppingListInput.jsx';
@@ -19,12 +19,6 @@ import {SHOPPINGLIST_ITEM} from 'constants';
 
 const SNACKBAR_UNDO_CREATE = 'SNACKBAR_UNDO_CREATE';
 const SNACKBAR_UNDO_CLEAN = 'SNACKBAR_UNDO_CLEAN';
-
-const style = {
-  minHeight: '100%'
-  // display: 'flex',
-  // flexDirection: 'column'
-};
 
 @Radium
 export default class ShoppingList extends ParseComponent {
@@ -42,7 +36,7 @@ export default class ShoppingList extends ParseComponent {
     const isAnItemDone = _some(this.data.items, item => item.done);
     const itemsExist = !!this.data.items.length;
 
-    return <div style={style}>
+    return <Card hasMinHeight>
       <Snackbar
         ref={SNACKBAR_UNDO_CREATE}
         action='undo'
@@ -55,7 +49,7 @@ export default class ShoppingList extends ParseComponent {
         onActionTouchTap={::this._handleUndoClean}
         message={'Cleaned up done items'} />
 
-      <List>
+      <List footerBig>
 
         <ShoppingListTitlebar
           itemsExist={itemsExist}
@@ -77,7 +71,7 @@ export default class ShoppingList extends ParseComponent {
       <ShoppingListFooter
         isAnItemDone={isAnItemDone}
         onDeleteDone={::this._handleDeleteAllDone} />
-    </div>;
+    </Card>;
   }
 
   /**

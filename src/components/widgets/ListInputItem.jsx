@@ -9,6 +9,7 @@ export default class ListInputItem extends ValidatedComponent {
   static propTypes = {
     iconName: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func,
     placeholder: PropTypes.string.isRequired
   }
 
@@ -23,6 +24,7 @@ export default class ListInputItem extends ValidatedComponent {
       noTouchColor>
       <Input
         placeholder={placeholder}
+        onKeyUp={::this._handleKeyUp}
         onKeyDown={::this._handleKeyDown}
         inputRef={::this._inputRef} />
     </ListItem>;
@@ -33,11 +35,16 @@ export default class ListInputItem extends ValidatedComponent {
   }
 
   _handleKeyDown(event) {
+    const {value} = event.target;
+
     if (event.keyCode === ENTER_KEY_CODE) {
-      const {value} = event.target;
       this.inputText = value;
       this._submit();
     }
+  }
+
+  _handleKeyUp() {
+    this.props.onKeyUp(this.inputComponent.value);
   }
 
   _submit() {

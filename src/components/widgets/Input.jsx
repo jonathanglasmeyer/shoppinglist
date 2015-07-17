@@ -16,14 +16,21 @@ const style = {
 export default class Input extends ValidatedComponent {
   static propTypes = {
     onKeyDown: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func,
     placeholder: PropTypes.string
   }
 
   render() {
-    const {onKeyDown, inputRef, placeholder} = this.props;
+    const {
+      onKeyDown,
+      onKeyUp,
+      inputRef,
+      placeholder
+    } = this.props;
 
     return <input
       onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
       placeholder={placeholder}
       style={style}
       type='text'

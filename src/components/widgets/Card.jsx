@@ -8,7 +8,6 @@ const base = {
   width: '100%',
   maxWidth: PAGE_WIDTH,
   borderRadius: 2,
-  // minHeight: '100%',
   background: '#fff',
   position: 'relative', // absolutely position Footer at bottom
   flex: 1,
