@@ -2,9 +2,10 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {LIST_ITEM_HEIGHT} from 'styles/dimensions';
+import {LIST_ITEM_HEIGHT} from 'styles/sizes';
 
-import {RICH_EXPERIENCE} from 'styles/sizes';
+const styles = {
+}
 
 @Radium
 export default class List extends ValidatedComponent {
@@ -16,9 +17,14 @@ export default class List extends ValidatedComponent {
 
   render() {
     const {footerBig, noFooter} = this.props;
-    const style = noFooter ? {} : {marginBottom: LIST_ITEM_HEIGHT + (footerBig ? 8 : 0)};
+    const style = [
+     styles,
+      !noFooter && {
+        paddingBottom: LIST_ITEM_HEIGHT + (footerBig ? 8 : 0)
+      }
+    ];
 
-    return <ul style={style}>
+    return <ul id='List' style={style}>
       {this.props.children}
     </ul>;
   }

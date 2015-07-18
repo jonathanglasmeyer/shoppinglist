@@ -3,13 +3,12 @@ import {ValidatedComponent} from 'utils';
 
 import ShoppingList from './MainPage/ShoppingList.jsx';
 
-import {Card, Page, SearchInput} from 'widgets';
-import {FixedLeft} from 'layouts';
+import {SearchCard} from 'widgets';
+import {TwoColumns, SingleColumn, Grid} from 'layouts';
 
 import Recipe from './MainPage/Recipe.jsx';
 
-import {RICH_EXPERIENCE_MINWIDTH} from 'styles/dimensions';
-import {PAGE_WIDTH, FIXED_LEFT_MARGIN} from 'styles/dimensions';
+import * as size from 'styles/sizes';
 
 const recipes = [
   {
@@ -36,21 +35,6 @@ const recipes = [
     title: 'Yet another Recipe',
     picturePath: 'mac-n-cheese.jpg',
     yOffset: 150
-  },
-  {
-    title: 'And Yet Another',
-    picturePath: 'recipe2.jpg',
-    yOffset: 150
-  },
-  {
-    title: 'Especially yummy recipe',
-    picturePath: 'recipe2.jpg',
-    yOffset: 150
-  },
-  {
-    title: 'This one is also great',
-    picturePath: 'recipe4.jpg',
-    yOffset: 100
   },
 ];
 
@@ -82,35 +66,46 @@ export default class MainPage extends ValidatedComponent {
     const recipesFiltered = recipes.filter(recipe =>
       recipe.title.toLowerCase().indexOf(filterText.toLowerCase()) >= 0);
 
-    const page = ({withShoppingList, searchFullWidth}) => {
-      return <Page>
-        {withShoppingList && <ShoppingList />}
+    return windowWidth < size.RICH_EXPERIENCE_MINWIDTH ?
+      this._renderSingleColumn({recipesFiltered}) :
+      this._renderTwoColumns({recipesFiltered});
+  }
 
-        <Card fullWidth={searchFullWidth}>
-          <SearchInput
-            onSearchChange={::this._handleSearchChange}
-            placeholder='Search Recipe' />
-        </Card>
+  _renderSingleColumn({recipesFiltered}) {
+    return <SingleColumn>
 
-        {recipesFiltered.map((recipe, i) =>
-            <Recipe key={i} recipe={recipe} />)}
+      <ShoppingList />
 
-      </Page>;
-    };
+      <SearchCard
+        handleSearchChange={::this._handleSearchChange}
+        placeholder='Search for recipe or ingredient' />
 
-    return windowWidth < RICH_EXPERIENCE_MINWIDTH ?
-      page({withShoppingList: true}) :
-      <div style={{
-        marginLeft: PAGE_WIDTH + FIXED_LEFT_MARGIN,
-        marginRight: 16
-      }}>
-        <FixedLeft>
-          <ShoppingList />
-        </FixedLeft>
-        {page({withShoppingList: false, searchFullWidth: true})}
+      {recipesFiltered.map((recipe, i) =>
+          <Recipe key={i} recipe={recipe} />)}
+
+    </SingleColumn>;
+  }
+
+  _renderTwoColumns({recipesFiltered}) {
+    return <TwoColumns>
+      <ShoppingList />
+      <div style={{width: '100%', flexDirection: 'column', display: 'flex'}}>
+        <SearchCard
+          handleSearchChange={::this._handleSearchChange}
+          placeholder='Search for recipe or ingredient' />
+        {this._renderGrid({recipesFiltered})}
       </div>
+    </TwoColumns>;
+  }
+
+  _renderGrid({recipesFiltered}) {
+    return <Grid>
 
 
+      {recipesFiltered.map((recipe, i) =>
+          <Recipe key={i} recipe={recipe} />)}
+
+    </Grid>;
   }
 
   _handleSearchChange(value) {

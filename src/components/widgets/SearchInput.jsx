@@ -16,17 +16,17 @@ export default class SearchInput extends ValidatedComponent {
       iconName='search'
       onKeyUp={::this._handleKeyUp}
       onSubmit={() => {}}
-      placeholder='Find Recipe' />;
+      placeholder={placeholder} />;
   }
 
   _handleKeyUp(value) {
-    if (this.timer) {
-      clearTimeout(this.timer);
-    }
+    this.props.onSearchChange(value);
+    // if (this.timer) {
+    //   clearTimeout(this.timer);
+    // }
 
-    this.timer = setTimeout(() => {
-      this.props.onSearchChange(value);
-    }, 150);
+    // this.timer = setTimeout(() => {
+    // }, 0);
   }
 
 }

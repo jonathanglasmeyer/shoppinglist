@@ -4,8 +4,6 @@ import Radium from 'radium';
 
 import {Title} from 'widgets';
 
-import {BELOW_380_WIDTH, RICH_EXPERIENCE} from 'styles/sizes';
-
 const BORDER_RADIUS = 3;
 
 const gradientBase = {
@@ -21,9 +19,7 @@ const gradientBase = {
 
 const styleWrapper = {
   width: '100%',
-  [BELOW_380_WIDTH]: {
-    height: '200',
-  },
+  height: '200',
   overflow: 'hidden',
   position: 'relative',
 };

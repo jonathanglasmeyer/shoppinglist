@@ -2,9 +2,8 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {BELOW_380_WIDTH, RICH_EXPERIENCE} from 'styles/sizes';
+import * as query from 'styles/mediaqueries';
 
-console.info('[Page.jsx] ', RICH_EXPERIENCE);
 const style = {
   display: 'flex',
   flexDirection: 'column',
@@ -13,28 +12,21 @@ const style = {
   width: '95%',
   marginTop: 8,
 
-  [BELOW_380_WIDTH]: {
+  [query.BELOW_380_WIDTH]: {
     marginTop: 24
   },
 
-  [RICH_EXPERIENCE]: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 32,
-    marginLeft: 32
-    // width: '80%',
-  }
 };
 
 @Radium
-export default class Page extends ValidatedComponent {
+export default class SingleColumn extends ValidatedComponent {
   static propTypes = {
     children: PropTypes.node.isRequired
   }
 
   render() {
 
-    return <div style={style}>
+    return <div style={style} id='SingleColumn'>
       {this.props.children}
     </div>;
   }

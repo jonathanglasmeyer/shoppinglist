@@ -7,8 +7,8 @@ import {
   LIST_ITEM_HEIGHT,
   LIST_ITEM_HEIGHT_BIG,
   LIST_ITEM_HEIGHT_HUGE
-} from 'styles/dimensions';
-import * as sizes from 'styles/sizes';
+} from 'styles/sizes';
+import * as sizes from 'styles/mediaqueries';
 
 const borderStyle = `1px solid ${Color.GRAY_LIGHT}`;
 

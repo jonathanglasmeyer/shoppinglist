@@ -1,10 +1,8 @@
-import {PAGE_WIDTH, RICH_EXPERIENCE_MINWIDTH} from 'styles/dimensions';
-
-export const BELOW_380_WIDTH =
-  `@media only screen and (min-device-width: ${PAGE_WIDTH}px)`;
-
-export const DESKTOP =
-  `@media only screen and (min-device-width: ${900}px)`;
-
-export const RICH_EXPERIENCE =
-  `@media only screen and (min-device-width: ${RICH_EXPERIENCE_MINWIDTH}px)`;
+// it's like the card with actually
+export const CARD_WIDTH = 320;
+export const PAGE_MARGIN = 16;
+export const PAGE_MARGIN_DESKTOP = 24;
+export const RICH_EXPERIENCE_MINWIDTH = 880;
+export const LIST_ITEM_HEIGHT = 56;
+export const LIST_ITEM_HEIGHT_BIG = 64;
+export const LIST_ITEM_HEIGHT_HUGE = 88;

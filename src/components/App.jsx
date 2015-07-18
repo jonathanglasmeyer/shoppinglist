@@ -10,21 +10,18 @@ import {Styles} from 'material-ui';
 const ThemeManager = new Styles.ThemeManager();
 
 // import NavigationBar from './App/NavigationBar.jsx';
-import Footer from './App/Footer.jsx';
+// import Footer from './App/Footer.jsx';
 
-// import {RICH_EXPERIENCE} from 'styles/sizes';
+import {BELOW_380_WIDTH} from 'styles/mediaqueries';
 
 const style = {
-  display: 'flex',
-  position: 'relative',
-  minHeight: '100%',
-  flexDirection: 'column',
-  alignItems: 'center'
-
-  // [RICH_EXPERIENCE]: {
-    // marginRight: 24
-  // }
-
+  [BELOW_380_WIDTH]: {
+    display: 'flex',
+    position: 'relative',
+    minHeight: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+  }
 };
 
 @Radium

@@ -2,15 +2,20 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {PAGE_WIDTH} from 'styles/dimensions';
-import {BELOW_380_WIDTH, RICH_EXPERIENCE} from 'styles/sizes';
+import * as size from 'styles/sizes';
+import * as media from 'styles/mediaqueries';
 
 const styles = {
   base: {
     width: '100%',
 
-    minWidth: PAGE_WIDTH,
-    maxWidth: PAGE_WIDTH,
+    minWidth: size.CARD_WIDTH,
+    maxWidth: size.CARD_WIDTH,
+
+    [media.BELOW_380_WIDTH]: {
+      minWidth: 380,
+      maxWidth: 380,
+    },
 
     borderRadius: 2,
     background: '#fff',
@@ -20,22 +25,22 @@ const styles = {
     boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.1)',
     marginBottom: 24,
 
-    [RICH_EXPERIENCE]: {
-      marginRight: 24
+    [media.RICH_EXPERIENCE]: {
+      marginRight: size.PAGE_MARGIN, // for being position in the grid
     }
   },
   minHeight: {
     minHeight: '75vh',
-    [RICH_EXPERIENCE]: {
-      minHeight: '90vh',
+    [media.RICH_EXPERIENCE]: {
+      minHeight: '94vh',
       // shopping list shoudn't grow in its fixed left
-      maxWidth: PAGE_WIDTH, 
+      maxWidth: size.CARD_WIDTH,
     }
   },
-
   fullWidth: {
     minWidth: '100%'
   }
+
 };
 
 
@@ -57,7 +62,7 @@ export default class Card extends ValidatedComponent {
       hasMinHeight && styles.minHeight
     ];
 
-    return <div style={style}>
+    return <div style={style} id='Card'>
       {children}
     </div>;
   }

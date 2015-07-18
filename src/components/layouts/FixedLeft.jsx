@@ -1,26 +1,30 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 
-import {PAGE_WIDTH} from 'styles/dimensions';
-
-const style = {
+const styles = {
   position: 'fixed',
   top: 0,
   left: 0,
-  margin: 32,
   height: '100vh',
-  width: PAGE_WIDTH + 32,
-  overflowY: 'scroll'
-}
+  overflow: 'auto'
+};
 
 export default class FixedLeft extends ValidatedComponent {
   static propTypes = {
-    // children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    width: PropTypes.number.isRequired,
+    margin: PropTypes.number.isRequired
   }
 
   render() {
+    const {width, margin} = this.props;
 
-    return <div style={style}>
+    const style = {
+      ...styles,
+      width, margin
+    };
+
+    return <div id='FixedLeft' style={style}>
       {this.props.children}
     </div>;
   }
