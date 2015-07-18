@@ -20,7 +20,13 @@ export default class SearchInput extends ValidatedComponent {
   }
 
   _handleKeyUp(value) {
-    this.props.onSearchChange(value);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+
+    this.timer = setTimeout(() => {
+      this.props.onSearchChange(value);
+    }, 150);
   }
 
 }

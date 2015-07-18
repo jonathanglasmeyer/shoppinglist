@@ -65,7 +65,6 @@ export default class MainPage extends ValidatedComponent {
     const recipesFiltered = recipes.filter(recipe => 
       recipe.title.toLowerCase().indexOf(filterText.toLowerCase()) >= 0);
 
-    console.info('[MainPage.jsx] ', recipesFiltered);
     return <Page>
       <ShoppingList onNotifyItemAdded={this.props.onNotifyItemAdded}/>
 
