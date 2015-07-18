@@ -16,6 +16,7 @@ export default class Titlebar extends ValidatedComponent {
     const {left, title, huge, onClick} = this.props;
 
     return <ListItem
+      big
       key={0}
       onClick={onClick}
       huge={huge} clickable

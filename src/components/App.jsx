@@ -12,12 +12,19 @@ const ThemeManager = new Styles.ThemeManager();
 // import NavigationBar from './App/NavigationBar.jsx';
 import Footer from './App/Footer.jsx';
 
+// import {RICH_EXPERIENCE} from 'styles/sizes';
+
 const style = {
   display: 'flex',
   position: 'relative',
   minHeight: '100%',
   flexDirection: 'column',
   alignItems: 'center'
+
+  // [RICH_EXPERIENCE]: {
+    // marginRight: 24
+  // }
+
 };
 
 @Radium
@@ -57,19 +64,20 @@ export default class App extends ParseComponent {
     });
   }
 
+
   render() {
-    const page = <MainPage />;
+    const main = <MainPage />;
 
     // if user is logged in
     if (this.data.user) {
 
       return <div style={style}>
-        {page}
-        <Footer
-          onLogout={::this._handleLogout}/>
+        {main}
 
       </div>;
     }
+        // <Footer
+          // onLogout={::this._handleLogout}/>
 
     // if user is not logged in
     return <div>

@@ -4,8 +4,12 @@ import {ValidatedComponent} from 'utils';
 import ShoppingList from './MainPage/ShoppingList.jsx';
 
 import {Card, Page, SearchInput} from 'widgets';
+import {FixedLeft} from 'layouts';
 
 import Recipe from './MainPage/Recipe.jsx';
+
+import {RICH_EXPERIENCE_MINWIDTH} from 'styles/dimensions';
+import {PAGE_WIDTH, FIXED_LEFT_MARGIN} from 'styles/dimensions';
 
 const recipes = [
   {
@@ -29,22 +33,22 @@ const recipes = [
     yOffset: 100
   },
   {
-    title: 'Poop',
+    title: 'Yet another Recipe',
     picturePath: 'mac-n-cheese.jpg',
     yOffset: 150
   },
   {
-    title: 'Dick',
+    title: 'And Yet Another',
     picturePath: 'recipe2.jpg',
     yOffset: 150
   },
   {
-    title: 'What fukcing else',
+    title: 'Especially yummy recipe',
     picturePath: 'recipe2.jpg',
     yOffset: 150
   },
   {
-    title: 'dunno',
+    title: 'This one is also great',
     picturePath: 'recipe4.jpg',
     yOffset: 100
   },
@@ -55,29 +59,58 @@ export default class MainPage extends ValidatedComponent {
   constructor(props) {
     super(props);
     this.state = {
-      filterText: ''
+      filterText: '',
+      windowWidth: window.innerWidth,
     };
   }
 
-  render() {
-    const {filterText} = this.state;
+  handleResize() {
+    this.setState({windowWidth: window.innerWidth});
+  }
 
-    const recipesFiltered = recipes.filter(recipe => 
+  componentDidMount() {
+    window.addEventListener('resize', ::this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', ::this.handleResize);
+  }
+
+  render() {
+    const {filterText, windowWidth} = this.state;
+
+    const recipesFiltered = recipes.filter(recipe =>
       recipe.title.toLowerCase().indexOf(filterText.toLowerCase()) >= 0);
 
-    return <Page>
-      <ShoppingList onNotifyItemAdded={this.props.onNotifyItemAdded}/>
+    const page = ({withShoppingList, searchFullWidth}) => {
+      return <Page>
+        {withShoppingList && <ShoppingList />}
 
-      <Card>
-        <SearchInput
-          onSearchChange={::this._handleSearchChange}
-          placeholder='Search Recipe' />
-      </Card>
+        <Card fullWidth={searchFullWidth}>
+          <SearchInput
+            onSearchChange={::this._handleSearchChange}
+            placeholder='Search Recipe' />
+        </Card>
 
-      {recipesFiltered.map((recipe, i) =>
-          <Recipe key={i} recipe={recipe} />)}
+        {recipesFiltered.map((recipe, i) =>
+            <Recipe key={i} recipe={recipe} />)}
 
-    </Page>;
+      </Page>;
+    };
+
+    return windowWidth < RICH_EXPERIENCE_MINWIDTH ?
+      page({withShoppingList: true}) :
+      <div style={{
+        marginLeft: PAGE_WIDTH + FIXED_LEFT_MARGIN,
+        marginRight: 16
+      }}>
+        <FixedLeft>
+          <ShoppingList />
+        </FixedLeft>
+        {page({withShoppingList: false, searchFullWidth: true})}
+      </div>
+
+
   }
 
   _handleSearchChange(value) {

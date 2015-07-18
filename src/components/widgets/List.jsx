@@ -4,6 +4,7 @@ import Radium from 'radium';
 
 import {LIST_ITEM_HEIGHT} from 'styles/dimensions';
 
+import {RICH_EXPERIENCE} from 'styles/sizes';
 
 @Radium
 export default class List extends ValidatedComponent {

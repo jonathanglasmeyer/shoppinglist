@@ -2,8 +2,9 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import {BELOW_380_WIDTH} from 'styles/sizes';
+import {BELOW_380_WIDTH, RICH_EXPERIENCE} from 'styles/sizes';
 
+console.info('[Page.jsx] ', RICH_EXPERIENCE);
 const style = {
   display: 'flex',
   flexDirection: 'column',
@@ -14,6 +15,14 @@ const style = {
 
   [BELOW_380_WIDTH]: {
     marginTop: 24
+  },
+
+  [RICH_EXPERIENCE]: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 32,
+    marginLeft: 32
+    // width: '80%',
   }
 };
 
