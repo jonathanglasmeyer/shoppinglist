@@ -9,12 +9,9 @@ const style = {
   flexDirection: 'column',
   alignItems: 'center',
 
-  width: '95%',
-  marginTop: 8,
-
-  [query.BELOW_380_WIDTH]: {
-    marginTop: 24
-  },
+  width: '100%',
+  marginTop: 24,
+  padding: '0 16px'
 
 };
 

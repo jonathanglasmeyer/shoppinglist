@@ -13,8 +13,7 @@ const styles = {
     maxWidth: size.CARD_WIDTH,
 
     [media.BELOW_380_WIDTH]: {
-      minWidth: 380,
-      maxWidth: 380,
+      minWidth: '100%'
     },
 
     borderRadius: 2,

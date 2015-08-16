@@ -3,8 +3,8 @@ import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
 const base = {
-  fontSize: 22,
-  fontFamily: 'Montserrat, sans-serif', // not sure ...
+  fontSize: 21,
+  fontFamily: 'Roboto', // not sure ...
   fontWeight: 400
 };
 

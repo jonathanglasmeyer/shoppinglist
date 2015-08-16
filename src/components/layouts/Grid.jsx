@@ -8,16 +8,12 @@ const styles = {
 };
 
 export default class Grid extends ValidatedComponent {
-  static propTypes = {
-    margin: PropTypes.number.isRequired
-  }
 
   render() {
     const {margin} = this.props;
 
     const style = {
-      ...styles,
-      margin
+      ...styles
     };
 
     return <div style={style} id='Grid'>
