@@ -16,10 +16,10 @@ export default class TwoColumns extends ValidatedComponent {
     const leftElementMargin = size.PAGE_MARGIN_DESKTOP; // all 4 directions
     // the shopping list is CARD_WIDTH wide
     // extra 16px to have some spacing to the scrollbar
-    const leftWidth = size.CARD_WIDTH + 16;
+    const leftWidth = size.CARD_WIDTH + 32;
 
     const style = {
-      marginLeft: leftWidth + leftElementMargin * 2,
+      marginLeft: leftWidth + leftElementMargin * 2 - 16, // wtf
       marginRight: 0, // the cards supply the margin
       marginTop: size.PAGE_MARGIN_DESKTOP
     };

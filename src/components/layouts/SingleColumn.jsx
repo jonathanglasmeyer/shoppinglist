@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
 
-import * as query from 'styles/mediaqueries';
+// import * as query from 'styles/mediaqueries';
 
 const style = {
   display: 'flex',

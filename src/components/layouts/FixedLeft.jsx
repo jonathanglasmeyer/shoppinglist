@@ -21,7 +21,12 @@ export default class FixedLeft extends ValidatedComponent {
 
     const style = {
       ...styles,
-      width, margin
+      width,
+      marginLeft: margin,
+      marginTop: margin,
+      marginBottom: margin,
+      paddingBottom: margin * 2,
+      marginRight: margin
     };
 
     return <div id='FixedLeft' style={style}>

@@ -13,26 +13,49 @@ import * as size from 'styles/sizes';
 const recipes = [
   {
     title: 'Incredible Mac ‘n’ Cheese, four ways',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     picturePath: 'mac-n-cheese.jpg',
     yOffset: 150
   },
   {
     title: 'Prawn & watermelon salad',
     picturePath: 'recipe2.jpg',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     yOffset: 150
   },
   {
     title: 'Prawn & watermelon salad',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     picturePath: 'recipe2.jpg',
     yOffset: 150
   },
   {
     title: 'Homemade tomato ketchup',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     picturePath: 'recipe4.jpg',
     yOffset: 100
   },
   {
     title: 'Yet another Recipe',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'mac-n-cheese.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Prawn & watermelon salad',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'recipe2.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Homemade tomato ketchup',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'recipe4.jpg',
+    yOffset: 100
+  },
+  {
+    title: 'Yet another Recipe',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     picturePath: 'mac-n-cheese.jpg',
     yOffset: 150
   },
@@ -45,6 +68,7 @@ export default class MainPage extends ValidatedComponent {
     this.state = {
       filterText: '',
       windowWidth: window.innerWidth,
+      recipesI: 1
     };
   }
 
@@ -54,6 +78,11 @@ export default class MainPage extends ValidatedComponent {
 
   componentDidMount() {
     window.addEventListener('resize', ::this.handleResize);
+
+    setInterval(() => {
+      this.setState({recipesI: this.state.recipesI + 1});
+    }, 200);
+
   }
 
   componentWillUnmount() {
@@ -63,13 +92,14 @@ export default class MainPage extends ValidatedComponent {
   render() {
     const {filterText, windowWidth} = this.state;
 
-    const recipesFiltered = recipes.filter(recipe =>
+    const recipesFiltered = recipes.slice(0, this.state.recipesI).filter(recipe =>
       recipe.title.toLowerCase().indexOf(filterText.toLowerCase()) >= 0);
 
     return windowWidth < size.RICH_EXPERIENCE_MINWIDTH ?
       this._renderSingleColumn({recipesFiltered}) :
       this._renderTwoColumns({recipesFiltered});
   }
+
 
   _renderSingleColumn({recipesFiltered}) {
     return <SingleColumn>
@@ -80,8 +110,7 @@ export default class MainPage extends ValidatedComponent {
         handleSearchChange={::this._handleSearchChange}
         placeholder='Search for recipe or ingredient' />
 
-      {recipesFiltered.map((recipe, i) =>
-          <Recipe key={i} recipe={recipe} />)}
+      {::this._renderRecipes(recipesFiltered)}
 
     </SingleColumn>;
   }
@@ -89,27 +118,32 @@ export default class MainPage extends ValidatedComponent {
   _renderTwoColumns({recipesFiltered}) {
     return <TwoColumns>
       <ShoppingList />
-      <div style={{width: '100%', flexDirection: 'column', display: 'flex'}}>
-        <SearchCard
-          handleSearchChange={::this._handleSearchChange}
-          placeholder='Search for recipe or ingredient' />
+      <div style={{width: '100%', flexDirection: 'column', display: 'flex'}} id='GridWrapper'>
         {this._renderGrid({recipesFiltered})}
       </div>
     </TwoColumns>;
   }
 
+
   _renderGrid({recipesFiltered}) {
-    return <Grid>
+    return <Grid>{::this._renderRecipes(recipesFiltered)}</Grid>;
+  }
 
-
-      {recipesFiltered.map((recipe, i) =>
-          <Recipe key={i} recipe={recipe} />)}
-
-    </Grid>;
+  _renderRecipes(recipes) {
+    return recipes.map((recipe, i) =>
+      <Recipe 
+        key={i} 
+        open={this.state.activeRecipe === i}
+        onSetActiveRecipe={::this._handleSetActiveRecipe} 
+        recipe={{...recipe, id: i}} />);
   }
 
   _handleSearchChange(value) {
     this.setState({filterText: value});
+  }
+
+  _handleSetActiveRecipe(id) {
+    this.setState({activeRecipe: id});
   }
 
 

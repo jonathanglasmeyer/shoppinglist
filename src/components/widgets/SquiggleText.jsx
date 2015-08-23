@@ -29,7 +29,7 @@ export default class SquiggleText extends ValidatedComponent {
     const width = spanElement.offsetWidth;
     const intensity = Math.max(Math.round(width / 15), 1); // smaller: higher intens
     const height = spanElement.offsetHeight;
-    const color = '#777';
+    const color = '#333';
     const step = width / intensity;
     const padding = height * 0.4;
     const thickness = 2; // in pixel

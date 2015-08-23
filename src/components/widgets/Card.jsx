@@ -31,7 +31,7 @@ const styles = {
   minHeight: {
     minHeight: '75vh',
     [media.RICH_EXPERIENCE]: {
-      minHeight: '94vh',
+      // minHeight: 'calc(100vh - 26px)',
       // shopping list shoudn't grow in its fixed left
       maxWidth: size.CARD_WIDTH,
     }
@@ -47,13 +47,13 @@ const styles = {
 export default class Card extends ValidatedComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
-
+    onClick: PropTypes.func,
     hasMinHeight: PropTypes.bool,
     fullWidth: PropTypes.bool
   }
 
   render() {
-    const {children, hasMinHeight, fullWidth} = this.props;
+    const {children, onClick, hasMinHeight, fullWidth} = this.props;
 
     const style = [
       styles.base,
@@ -61,7 +61,7 @@ export default class Card extends ValidatedComponent {
       hasMinHeight && styles.minHeight
     ];
 
-    return <div style={style} id='Card'>
+    return <div style={style} id='Card' onClick={onClick}>
       {children}
     </div>;
   }

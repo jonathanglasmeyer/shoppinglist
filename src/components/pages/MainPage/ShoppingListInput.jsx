@@ -12,9 +12,8 @@ export default class ShoppingListInput extends ValidatedComponent {
     const {onSubmit} = this.props;
 
     return <ListInputItem
-      iconName='pencil'
       onSubmit={onSubmit}
-      placeholder='Article' />;
+      placeholder='New Article' />;
 
   }
 
