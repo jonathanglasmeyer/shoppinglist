@@ -29,9 +29,11 @@
     "radium": "^0.13.2",
     "react": "^0.13.3",
     "react-masonry-component": "1.0.4",
+    "react-router": "1.0.0-beta3",
     "react-tap-event-plugin": "^0.1.7",
     "react-tappable": "^0.5.2",
-    "redux": "^0.12.0"
+    "redux": "1.0.1",
+    "redux-react-router": "^0.4.0"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^2.2.0",
@@ -43,6 +45,7 @@
     "envify": "^1.2.1",
     "envify-loader": "^0.1.0",
     "eslint": "^0.23.0",
+    "eslint-config-airbnb": "0.0.8",
     "eslint-loader": "^0.14.0",
     "eslint-plugin-react": "2.5.2",
     "extract-text-webpack-plugin": "0.8.2",
@@ -53,6 +56,7 @@
     "node-libs-browser": "^0.5.2",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "1.2.7",
+    "redux-devtools": "1.1.2",
     "style-loader": "0.12.3",
     "transform-loader": "0.2.2",
     "webpack": "^1.9.12",

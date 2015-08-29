@@ -1,35 +1,42 @@
 {
-  "parser": "babel-eslint",
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true,
-    "blockBindings": true
-  },
+  "extends": "airbnb",
   "rules": {
-    "quotes": [2, "single"],
-    "eol-last": [0],
-    "no-alert": 0,
-    "new-cap": 0,
-    "no-debugger": 0,
     "comma-dangle": 0,
-    "no-mixed-requires": [0],
-    "no-underscore-dangle": [0],
-    "strict": [2, "never"],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2,
-    "semi": 0,
-  },
-  "plugins": [
-    "react"
-  ],
-  "globals": {
-    "Stripe": true,
-    "ga": true,
-    "google": true
+    "no-console": 0,
+    "no-else-return": 0,
+    "block-scoped-var": 0,
+    "react/jsx-quotes": [2, "single", "avoid-escape"],
+    "react/wrap-multilines": 0,
+    "new-cap": 0,
+    "spaced-comment": 0,
+    "react/sort-comp": [1, {
+      order: [
+        'lifecycle',
+        'render',
+      ],
+      "groups": {
+         "lifecycle": [
+           "displayName",
+           "constructor",
+           "propTypes",
+           "defaultProps",
+           "contextTypes",
+           "childContextTypes",
+           "getChildContext",
+           "mixins",
+           "statics",
+           "getDefaultProps",
+           "getInitialState",
+           "componentWillMount",
+           "componentDidMount",
+           "componentWillReceiveProps",
+           "shouldComponentUpdate",
+           "componentWillUpdate",
+           "componentDidUpdate",
+           "componentWillUnmount",
+           "observe",
+         ]
+      }
+    }]
   }
 }
