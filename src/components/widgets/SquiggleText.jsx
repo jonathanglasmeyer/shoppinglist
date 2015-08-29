@@ -40,7 +40,6 @@ export default class SquiggleText extends ValidatedComponent {
     spline.draw(canvasContext, color, thickness); // this mutates the canvasContext
     const canvasImage = getImageFromCanvas(canvas);
     this.setState({backgroundImage: canvasImage});
-
   }
 
   render() {

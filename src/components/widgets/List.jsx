@@ -6,7 +6,7 @@ import {LIST_ITEM_HEIGHT} from 'styles/sizes';
 
 
 const styles = {
-}
+};
 
 @Radium
 export default class List extends ValidatedComponent {

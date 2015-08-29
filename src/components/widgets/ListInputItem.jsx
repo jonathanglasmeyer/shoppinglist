@@ -14,13 +14,12 @@ export default class ListInputItem extends ValidatedComponent {
   }
 
   render() {
-    const {iconName, onSubmit, placeholder} = this.props;
+    const {placeholder} = this.props;
 
     return <ListItem
       key={1}
       onClick={::this._focus}
-      onClickLeft={::this._submit}
-      noTouchColor>
+      onClickLeft={::this._submit}>
       <Input
         placeholder={placeholder}
         onKeyUp={::this._handleKeyUp}

@@ -10,7 +10,6 @@ export default class RecipeListItem extends ValidatedComponent {
   }
 
   render() {
-
     return <ListItem>
       {this.props.ingredient}
     </ListItem>;

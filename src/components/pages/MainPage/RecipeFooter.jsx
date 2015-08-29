@@ -9,7 +9,6 @@ export default class RecipeFooter extends ValidatedComponent {
   }
 
   render() {
-
     return <ListItemFooter pullRight>
       <FlatButton
         label='BUY'

@@ -14,7 +14,6 @@ export default process.env.NODE_ENV === 'development' ? class ValidatedComponent
   }
 
   validateProps(props) {
-
     const {displayName, name, propTypes} = this.constructor;
     const componentName = displayName || name;
 
@@ -32,7 +31,7 @@ export default process.env.NODE_ENV === 'development' ? class ValidatedComponent
       console.warn(`There are no PropTypes specified on component "${componentName}". Cannot validate props. The given props are: `, props);
       return;
     }
-    for (let prop in props) {
+    for (const prop in props) {
       if (!propTypes[prop] && prop !== 'children') {
         console.warn(`You set a property "${prop}" on Component "${componentName}" but did not provide a PropType declaration for this prop.`);
       }

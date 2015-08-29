@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import ParseReact from 'parse-react';
 import {Parse} from 'parse';
+import {Link} from 'react-router';
 
 import {SHOPPINGLIST_ITEM} from 'constants';
 
-import {Card, List, TitleImage} from 'widgets';
+import {Card, TitleImage} from 'widgets';
 
-import RecipeListItem from './RecipeListItem.jsx';
-import RecipeFooter from './RecipeFooter.jsx';
+// import RecipeListItem from './RecipeListItem.jsx';
+// import RecipeFooter from './RecipeFooter.jsx';
 
 export default class Recipe extends Component {
   static propTypes = {
@@ -23,22 +24,14 @@ export default class Recipe extends Component {
     const {recipe} = this.props;
     const {title, picturePath, yOffset} = recipe;
 
-    return <Card>
-      <List>
+    return <Link to={`/recipe/${recipe.id}`}>
+      <Card>
         <TitleImage
-          onClick={::this._handleClick}
           path={picturePath}
           title={title}
           yOffset={yOffset} />
-        <RecipeFooter />
-      </List>
-
-    </Card>;
-  }
-
-  _handleClick() {
-    const {recipe} = this.props;
-    this.props.onSetActiveRecipe(recipe.id);
+      </Card>
+    </Link>;
   }
 
   // later
@@ -56,7 +49,6 @@ export default class Recipe extends Component {
         user: Parse.User.current().toPlainObject()
       }).dispatch();
     });
-
   }
 
 }

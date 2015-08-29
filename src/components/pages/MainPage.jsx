@@ -27,6 +27,76 @@ const recipes = [
     ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     yOffset: 150
   },
+  {
+    title: 'Incredible Mac ‘n’ Cheese, four ways',
+    id: 'foo',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'mac-n-cheese.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Prawn & watermelon salad',
+    id: 'bar',
+    picturePath: 'recipe2.jpg',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    yOffset: 150
+  },
+  {
+    title: 'Incredible Mac ‘n’ Cheese, four ways',
+    id: 'foo',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'mac-n-cheese.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Prawn & watermelon salad',
+    id: 'bar',
+    picturePath: 'recipe2.jpg',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    yOffset: 150
+  },
+  {
+    title: 'Incredible Mac ‘n’ Cheese, four ways',
+    id: 'foo',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'mac-n-cheese.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Prawn & watermelon salad',
+    id: 'bar',
+    picturePath: 'recipe2.jpg',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    yOffset: 150
+  },
+  {
+    title: 'Incredible Mac ‘n’ Cheese, four ways',
+    id: 'foo',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'mac-n-cheese.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Prawn & watermelon salad',
+    id: 'bar',
+    picturePath: 'recipe2.jpg',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    yOffset: 150
+  },
+  {
+    title: 'Incredible Mac ‘n’ Cheese, four ways',
+    id: 'foo',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    picturePath: 'mac-n-cheese.jpg',
+    yOffset: 150
+  },
+  {
+    title: 'Prawn & watermelon salad',
+    id: 'bar',
+    picturePath: 'recipe2.jpg',
+    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
+    yOffset: 150
+  },
 ];
 
 export default class MainPage extends Component {
@@ -100,8 +170,8 @@ export default class MainPage extends Component {
     return <Grid>{::this._renderRecipes(recipesFiltered)}</Grid>;
   }
 
-  _renderRecipes(recipes) {
-    return recipes.map((recipe, i) =>
+  _renderRecipes(recipes_) {
+    return recipes_.map((recipe, i) =>
       <Recipe
         key={i}
         onSetActiveRecipe={::this._handleSetActiveRecipe}

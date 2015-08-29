@@ -26,7 +26,6 @@ const style = {
 
 @Radium
 export default class App extends ParseComponent {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -36,11 +35,8 @@ export default class App extends ParseComponent {
     };
   }
 
-  observe() {
-    return {
-      user: ParseReact.currentUser
-    };
-
+  static propTypes = {
+    children: PropTypes.node
   }
 
   static childContextTypes = {
@@ -61,20 +57,23 @@ export default class App extends ParseComponent {
     });
   }
 
+  observe() {
+    return {
+      user: ParseReact.currentUser
+    };
+  }
+
 
   render() {
     const main = <MainPage />;
+    const {children=main} = this.props;
 
     // if user is logged in
     if (this.data.user) {
-
       return <div style={style}>
-        {main}
-
+        {children}
       </div>;
     }
-        // <Footer
-          // onLogout={::this._handleLogout}/>
 
     // if user is not logged in
     return <div>
@@ -88,7 +87,7 @@ export default class App extends ParseComponent {
           {this.state.signup ? 'Signup' : 'Login'}
         </button>
         <input
-          type="checkbox"
+          type='checkbox'
           checked={this.state.signup}
           onChange={::this._toggleSignup}>
 
@@ -122,7 +121,7 @@ export default class App extends ParseComponent {
         this.setState({
           error: null
         });
-      }, function() {
+      }, () => {
         this.setState({
           error: 'Invalid stuff'
         });

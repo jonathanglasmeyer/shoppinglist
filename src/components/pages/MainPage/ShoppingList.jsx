@@ -82,7 +82,6 @@ export default class ShoppingList extends ParseComponent {
   }
 
   _handleAddItem(name) {
-
     ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
       name: name.trim(),
       done: false,
@@ -105,7 +104,6 @@ export default class ShoppingList extends ParseComponent {
   }
 
   _handleSetAllDone() {
-
     const bool = !this._allDone();
 
     this.data.items.forEach(item => {

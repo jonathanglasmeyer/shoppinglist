@@ -106,17 +106,5 @@ export default class ListItem extends ValidatedComponent {
       </div>}
       {children}
     </li>;
-
   }
-
 }
-
-    // return tappable({
-    //   noTouchColor,
-    //   component: 'li',
-    //   name: 'ListItemTappable',
-    //   onClick,
-    //   style: style_,
-    //   activeStyle,
-    //   children
-    // });

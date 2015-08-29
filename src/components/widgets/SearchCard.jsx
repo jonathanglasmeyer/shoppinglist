@@ -18,7 +18,6 @@ export default class SearchCard extends ValidatedComponent {
         onSearchChange={handleSearchChange}
         placeholder={placeholder} />
     </Card>;
-
   }
 
 }

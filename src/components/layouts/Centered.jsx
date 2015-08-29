@@ -17,7 +17,6 @@ export default class Centered extends ValidatedComponent {
   }
 
   render() {
-
     return <div style={style}>
       {this.props.children}
     </div>;

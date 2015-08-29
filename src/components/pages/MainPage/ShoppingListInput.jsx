@@ -14,11 +14,5 @@ export default class ShoppingListInput extends ValidatedComponent {
     return <ListInputItem
       onSubmit={onSubmit}
       placeholder='New Article' />;
-
   }
-
-
-
-
-
 }

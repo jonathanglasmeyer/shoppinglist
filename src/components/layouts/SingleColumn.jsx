@@ -22,7 +22,6 @@ export default class SingleColumn extends ValidatedComponent {
   }
 
   render() {
-
     return <div style={style} id='SingleColumn'>
       {this.props.children}
     </div>;

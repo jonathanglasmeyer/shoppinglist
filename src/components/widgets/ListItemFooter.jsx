@@ -18,7 +18,7 @@ export default class ListItemFooter extends ValidatedComponent {
   render() {
     const {pullRight} = this.props;
 
-    return <ListItem style={style} pullRight>
+    return <ListItem style={style} pullRight={pullRight}>
       {this.props.children}
     </ListItem>;
   }

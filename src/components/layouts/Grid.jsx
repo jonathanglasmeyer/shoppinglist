@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import masonry from 'react-masonry-component';
 const Masonry = masonry(React);
-console.info('[Grid.jsx] ', Masonry);
 
 // const styles = {
 //   display: 'flex',
@@ -13,9 +12,12 @@ console.info('[Grid.jsx] ', Masonry);
 // };
 
 export default class Grid extends ValidatedComponent {
+  static propTypes = {
+    children: PropTypes.node.isRequired
+  }
 
   render() {
-    const {margin, children} = this.props;
+    const {children} = this.props;
 
     // const style = {
     //   ...styles

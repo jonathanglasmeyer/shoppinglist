@@ -18,7 +18,7 @@ const gradientBase = {
 };
 
 function getRandomHeight() {
-  return 150 + Math.floor(150 * Math.random());
+  return 150 + Math.floor(120 * Math.random());
 }
 
 const styleWrapper = {
@@ -53,15 +53,6 @@ export default class TitleImage extends ValidatedComponent {
     title: PropTypes.string
   }
 
-  randomHeight() {
-    // return 100;
-    if (this._randomHeight) {
-      return this._randomHeight;
-    } else {
-      this._randomHeight = getRandomHeight();
-      return this._randomHeight;
-    }
-  }
 
   render() {
     const {path, yOffset=0, title, onClick} = this.props;
@@ -76,7 +67,7 @@ export default class TitleImage extends ValidatedComponent {
       {background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,.8) 100%)'}
     ];
 
-    const wrapperStyle = {...styleWrapper, height: this.randomHeight()};
+    const wrapperStyle = {...styleWrapper, height: this._randomHeight()};
 
     return <div style={wrapperStyle} onClick={onClick}>
       <img style={style} src={path} />
@@ -85,6 +76,16 @@ export default class TitleImage extends ValidatedComponent {
         <Title color='#fff'>{title}</Title>
       </div>
     </div>;
+  }
+
+  _randomHeight() {
+    // return 100;
+    if (this._randomHeightCache) {
+      return this._randomHeightCache;
+    } else {
+      this._randomHeightCache = getRandomHeight();
+      return this._randomHeightCache;
+    }
   }
 
 }

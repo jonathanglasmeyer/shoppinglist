@@ -17,14 +17,14 @@ export default class Input extends ValidatedComponent {
   static propTypes = {
     onKeyDown: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    inputRef: PropTypes.func
   }
 
   render() {
     const {
       onKeyDown,
       onKeyUp,
-      inputRef,
       placeholder
     } = this.props;
 
