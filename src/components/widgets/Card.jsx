@@ -7,14 +7,6 @@ import * as media from 'styles/mediaqueries';
 
 const styles = {
   base: {
-    width: '100%',
-
-    minWidth: size.CARD_WIDTH,
-    maxWidth: size.CARD_WIDTH,
-
-    [media.BELOW_380_WIDTH]: {
-      minWidth: '100%'
-    },
 
     borderRadius: 2,
     background: '#fff',
@@ -36,8 +28,23 @@ const styles = {
       maxWidth: size.CARD_WIDTH,
     }
   },
+
   fullWidth: {
     minWidth: '100%'
+  },
+
+  wider: {
+    width: '100%',
+    maxWidth: 500
+  },
+
+  normalWidth: {
+    width: '100%',
+    minWidth: size.CARD_WIDTH,
+    maxWidth: size.CARD_WIDTH,
+    [media.BELOW_380_WIDTH]: {
+      minWidth: '100%'
+    }
   }
 
 };
@@ -49,15 +56,17 @@ export default class Card extends ValidatedComponent {
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
     hasMinHeight: PropTypes.bool,
-    fullWidth: PropTypes.bool
+    fullWidth: PropTypes.bool,
+    wider: PropTypes.bool
   }
 
   render() {
-    const {children, onClick, hasMinHeight, fullWidth} = this.props;
+    const {children, onClick, hasMinHeight, fullWidth, wider} = this.props;
 
     const style = [
       styles.base,
       fullWidth && styles.fullWidth,
+      wider ? styles.wider : styles.normalWidth,
       hasMinHeight && styles.minHeight
     ];
 

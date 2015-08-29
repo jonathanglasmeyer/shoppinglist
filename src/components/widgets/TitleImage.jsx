@@ -47,6 +47,7 @@ const titleStyle = {
 @Radium
 export default class TitleImage extends ValidatedComponent {
   static propTypes = {
+    onClick: PropTypes.func,
     path: PropTypes.string.isRequired,
     yOffset: PropTypes.number,
     title: PropTypes.string
@@ -63,7 +64,7 @@ export default class TitleImage extends ValidatedComponent {
   }
 
   render() {
-    const {path, yOffset=0, title} = this.props;
+    const {path, yOffset=0, title, onClick} = this.props;
 
     const style = [
       base,
@@ -77,7 +78,7 @@ export default class TitleImage extends ValidatedComponent {
 
     const wrapperStyle = {...styleWrapper, height: this.randomHeight()};
 
-    return <div style={wrapperStyle}>
+    return <div style={wrapperStyle} onClick={onClick}>
       <img style={style} src={path} />
       <div style={gradientStyle} />
       <div style={titleStyle}>

@@ -1,10 +1,12 @@
-import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
-import {ValidatedComponent} from 'utils';
+import React, {Component, PropTypes} from 'react'; // eslint-disable-line no-unused-vars
+import {first as _first} from 'lodash';
 
 import ShoppingList from './MainPage/ShoppingList.jsx';
 
 import {SearchCard} from 'widgets';
 import {TwoColumns, SingleColumn, Grid} from 'layouts';
+
+import {RecipeDetailPage} from 'pages';
 
 import Recipe from './MainPage/Recipe.jsx';
 
@@ -13,62 +15,28 @@ import * as size from 'styles/sizes';
 const recipes = [
   {
     title: 'Incredible Mac ‘n’ Cheese, four ways',
+    id: 'foo',
     ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
     picturePath: 'mac-n-cheese.jpg',
     yOffset: 150
   },
   {
     title: 'Prawn & watermelon salad',
+    id: 'bar',
     picturePath: 'recipe2.jpg',
     ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    yOffset: 150
-  },
-  {
-    title: 'Prawn & watermelon salad',
-    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    picturePath: 'recipe2.jpg',
-    yOffset: 150
-  },
-  {
-    title: 'Homemade tomato ketchup',
-    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    picturePath: 'recipe4.jpg',
-    yOffset: 100
-  },
-  {
-    title: 'Yet another Recipe',
-    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    picturePath: 'mac-n-cheese.jpg',
-    yOffset: 150
-  },
-  {
-    title: 'Prawn & watermelon salad',
-    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    picturePath: 'recipe2.jpg',
-    yOffset: 150
-  },
-  {
-    title: 'Homemade tomato ketchup',
-    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    picturePath: 'recipe4.jpg',
-    yOffset: 100
-  },
-  {
-    title: 'Yet another Recipe',
-    ingredients: 'Lecker schmecker leckere SachenLecker schmecker leckere SachenLecker schmecker leckere Sachen'.split(' '),
-    picturePath: 'mac-n-cheese.jpg',
     yOffset: 150
   },
 ];
 
-export default class MainPage extends ValidatedComponent {
+export default class MainPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       filterText: '',
       windowWidth: window.innerWidth,
-      recipesI: 1
+      activeRecipe: null
     };
   }
 
@@ -78,11 +46,6 @@ export default class MainPage extends ValidatedComponent {
 
   componentDidMount() {
     window.addEventListener('resize', ::this.handleResize);
-
-    setInterval(() => {
-      this.setState({recipesI: this.state.recipesI + 1});
-    }, 200);
-
   }
 
   componentWillUnmount() {
@@ -90,14 +53,22 @@ export default class MainPage extends ValidatedComponent {
   }
 
   render() {
-    const {filterText, windowWidth} = this.state;
+    const {filterText, windowWidth, activeRecipe} = this.state;
+    if (activeRecipe) {
+      return this._renderDetailRecipe();
+    }
 
-    const recipesFiltered = recipes.slice(0, this.state.recipesI).filter(recipe =>
+    const recipesFiltered = recipes.filter(recipe =>
       recipe.title.toLowerCase().indexOf(filterText.toLowerCase()) >= 0);
 
     return windowWidth < size.RICH_EXPERIENCE_MINWIDTH ?
       this._renderSingleColumn({recipesFiltered}) :
       this._renderTwoColumns({recipesFiltered});
+  }
+
+  _renderDetailRecipe() {
+    const activeRecipe = _first(recipes, recipe => recipe.id === this.state.activeRecipe);
+    return <RecipeDetailPage recipe={activeRecipe} />;
   }
 
 
@@ -131,11 +102,10 @@ export default class MainPage extends ValidatedComponent {
 
   _renderRecipes(recipes) {
     return recipes.map((recipe, i) =>
-      <Recipe 
-        key={i} 
-        open={this.state.activeRecipe === i}
-        onSetActiveRecipe={::this._handleSetActiveRecipe} 
-        recipe={{...recipe, id: i}} />);
+      <Recipe
+        key={i}
+        onSetActiveRecipe={::this._handleSetActiveRecipe}
+        recipe={recipe} />);
   }
 
   _handleSearchChange(value) {

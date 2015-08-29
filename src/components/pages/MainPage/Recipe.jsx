@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'; // eslint-disable-line no-unused-vars
-import {ValidatedComponent} from 'utils';
 import ParseReact from 'parse-react';
 import {Parse} from 'parse';
 
@@ -8,12 +7,12 @@ import {SHOPPINGLIST_ITEM} from 'constants';
 import {Card, List, TitleImage} from 'widgets';
 
 import RecipeListItem from './RecipeListItem.jsx';
+import RecipeFooter from './RecipeFooter.jsx';
 
 export default class Recipe extends Component {
   static propTypes = {
     recipe: PropTypes.object.isRequired,
-    onSetActiveRecipe: PropTypes.func.isRequired,
-    open: PropTypes.bool
+    onSetActiveRecipe: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -21,26 +20,25 @@ export default class Recipe extends Component {
   }
 
   render() {
-    const {recipe, open} = this.props;
+    const {recipe} = this.props;
     const {title, picturePath, yOffset} = recipe;
 
-    return <Card onClick={::this._handleClick}>
-      <List noFooter>
+    return <Card>
+      <List>
         <TitleImage
+          onClick={::this._handleClick}
           path={picturePath}
           title={title}
           yOffset={yOffset} />
-        {open && recipe.ingredients.map(ingredient => <RecipeListItem ingredient={ingredient} />)}
+        <RecipeFooter />
       </List>
 
     </Card>;
   }
 
   _handleClick() {
-    // TODO: we need a real id for this later
-    const {recipe, open} = this.props;
-
-    this.props.onSetActiveRecipe(open ? null : recipe.id);
+    const {recipe} = this.props;
+    this.props.onSetActiveRecipe(recipe.id);
   }
 
   // later
