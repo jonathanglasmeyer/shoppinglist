@@ -13,3 +13,4 @@ export TitleImage from './TitleImage.jsx';
 export Title from './Title.jsx';
 export SearchInput from './SearchInput.jsx';
 export SearchCard from './SearchCard.jsx';
+export ShoppingList from './ShoppingList.jsx';

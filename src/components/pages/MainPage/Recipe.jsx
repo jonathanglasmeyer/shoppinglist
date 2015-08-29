@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import ParseReact from 'parse-react';
 import {Parse} from 'parse';
-import {Link} from 'react-router';
+// import {Link} from 'react-router';
 
 import {SHOPPINGLIST_ITEM} from 'constants';
 
@@ -24,14 +24,15 @@ export default class Recipe extends Component {
     const {recipe} = this.props;
     const {title, picturePath, yOffset} = recipe;
 
-    return <Link to={`/recipe/${recipe.id}`}>
+    // return <Link to={`/recipe/${recipe.id}`}>
+    return (
       <Card>
         <TitleImage
           path={picturePath}
           title={title}
           yOffset={yOffset} />
       </Card>
-    </Link>;
+    );
   }
 
   // later

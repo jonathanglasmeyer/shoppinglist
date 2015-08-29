@@ -33,6 +33,7 @@
     "react-tap-event-plugin": "^0.1.7",
     "react-tappable": "^0.5.2",
     "redux": "1.0.1",
+    "redux-action-utils": "2.0.0",
     "redux-react-router": "^0.4.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {first as _first} from 'lodash';
 
-import ShoppingList from './MainPage/ShoppingList.jsx';
+import {ShoppingListController} from 'components/controllers';
 
 import {SearchCard} from 'widgets';
 import {TwoColumns, SingleColumn, Grid} from 'layouts';
@@ -145,7 +145,7 @@ export default class MainPage extends Component {
   _renderSingleColumn({recipesFiltered}) {
     return <SingleColumn>
 
-      <ShoppingList />
+      <ShoppingListController />
 
       <SearchCard
         handleSearchChange={::this._handleSearchChange}
@@ -158,7 +158,7 @@ export default class MainPage extends Component {
 
   _renderTwoColumns({recipesFiltered}) {
     return <TwoColumns>
-      <ShoppingList />
+      <ShoppingListController />
       <div style={{width: '100%', flexDirection: 'column', display: 'flex'}} id='GridWrapper'>
         {this._renderGrid({recipesFiltered})}
       </div>
