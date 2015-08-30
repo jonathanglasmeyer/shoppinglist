@@ -65,8 +65,6 @@ export default class App extends ParseComponent {
 
 
   render() {
-    console.info('[App.jsx] ', this.props);
-
     const main = <MainPage />;
     const {children=main} = this.props;
 

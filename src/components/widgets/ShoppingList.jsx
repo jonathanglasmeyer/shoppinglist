@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import ParseComponent from 'parse-react/class';
+import {connect} from 'react-redux';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import Radium from 'radium';
@@ -16,16 +17,21 @@ import ShoppingListFooter from './ShoppingList/ShoppingListFooter.jsx';
 
 import {SHOPPINGLIST_ITEM} from 'constants';
 
+import * as shoppinglistActions from 'actions/shoppinglist';
 
 const SNACKBAR_UNDO_CREATE = 'SNACKBAR_UNDO_CREATE';
 const SNACKBAR_UNDO_CLEAN = 'SNACKBAR_UNDO_CLEAN';
 
 @Radium
+@connect((state) => ({items: state.shoppinglistItems}), shoppinglistActions)
 export default class ShoppingList extends Component {
   static propTypes = {
     items: PropTypes.array
   }
 
+  componentDidMount() {
+    this.props.fetchAllItems();
+  }
   // observe() {
   //   return {
   //     items: new Parse.Query(SHOPPINGLIST_ITEM)
@@ -35,13 +41,14 @@ export default class ShoppingList extends Component {
   // }
 
   render() {
+    console.info('[ShoppingList.jsx] ', this.props);
     const {items} = this.props;
-    console.info('[ShoppingList.jsx] ', items);
     // const isLoading = !!this.pendingQueries().length;
     const isLoading = false;
     // const isAnItemDone = _some(this.data.items, item => item.done);
     const isAnItemDone = false;
-    const itemsExist = items && !!items.length;
+    // const itemsExist = items && !!items.length;
+    const itemsExist = true;
 
     return <Card hasMinHeight>
       <Snackbar
@@ -89,6 +96,8 @@ export default class ShoppingList extends Component {
   }
 
   _handleAddItem(name) {
+    console.info('[ShoppingList.jsx] ', 'add');
+    this.props.addItem(name.trim());
     // ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
     //   name: name.trim(),
     //   done: false,

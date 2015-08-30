@@ -14,7 +14,7 @@ export default class ListInputItem extends ValidatedComponent {
   }
 
   render() {
-    const {placeholder} = this.props;
+    const {placeholder, onKeyUp} = this.props;
 
     return <ListItem
       key={1}
@@ -22,7 +22,7 @@ export default class ListInputItem extends ValidatedComponent {
       onClickLeft={::this._submit}>
       <Input
         placeholder={placeholder}
-        onKeyUp={::this._handleKeyUp}
+        onKeyUp={onKeyUp && ::this._handleKeyUp}
         onKeyDown={::this._handleKeyDown}
         inputRef={::this._inputRef} />
     </ListItem>;

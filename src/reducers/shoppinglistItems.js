@@ -1,25 +1,29 @@
 // import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_COMPLETED} from 'constants/ActionTypes';
+import {createAction} from 'redux-actions';
 import * as actions from 'constants/ActionTypes';
 
-const initialState = [{
-  id: 0,
-  done: false,
-  name: 'Foo'
-}, {
-  id: 1,
-  done: true,
-  name: 'Bar'
-}
-];
+const initialState = [];
 
 export default function shoppingListItems(state = initialState, action) {
   switch (action.type) {
-  case actions.ADD_SHOPPINGLIST_ITEM:
-    return [{
-      id: state.reduce((maxId, item) => Math.max(item.id, maxId), -1) + 1,
-      done: true,
-      text: action.text
-    }, ...state];
+
+  // case actions.ADD_SHOPPINGLIST_ITEM: {
+  //   const items = action.payload;
+  //   const itemsPlain = items.map(item => item.toPlainObject());
+  //   return itemsPlain;
+  // }
+
+  case actions.FETCH_SHOPPINGLIST_ITEMS: {
+    console.info('[shoppinglistItems.js] ', 'reduce fetch');
+    const items = action.payload;
+    const itemsPlain = items.map(item => item.toPlainObject());
+    return itemsPlain;
+  }
+    // return [{
+    //   id: state.reduce((maxId, item) => Math.max(item.id, maxId), -1) + 1,
+    //   done: false,
+    //   name: action.payload
+    // }, ...state];
 
   // case DELETE_TODO:
   //   return state.filter(todo =>
