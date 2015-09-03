@@ -14,11 +14,9 @@ export default function shoppingListItems(state = initialState, action) {
   // }
 
   case actions.FETCH_SHOPPINGLIST_ITEMS: {
-    console.info('[shoppinglistItems.js] ', 'reduce fetch');
     const items = action.payload;
-    // const itemsPlain = items.map(item => item.toPlainObject);
-    // return itemsPlain;
-    return ['a'];
+    const itemsPlain = items.map(item => item.toPlainObject());
+    return itemsPlain;
   }
     // return [{
     //   id: state.reduce((maxId, item) => Math.max(item.id, maxId), -1) + 1,
