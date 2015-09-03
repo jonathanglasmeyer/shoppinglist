@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
+const myImg = require('assets/images/recipe4.jpg');
+console.info('[TitleImage.jsx] ', myImg);
 
 import {Title} from 'widgets';
 
@@ -68,9 +70,11 @@ export default class TitleImage extends ValidatedComponent {
     ];
 
     const wrapperStyle = {...styleWrapper, height: this._randomHeight()};
+    const imgPath = require(`assets/images/${path}`);
+    console.info('[TitleImage.jsx] ', imgPath);
 
     return <div style={wrapperStyle} onClick={onClick}>
-      <img style={style} src={path} />
+      <img style={style} src={imgPath} />
       <div style={gradientStyle} />
       <div style={titleStyle}>
         <Title color='#fff'>{title}</Title>
