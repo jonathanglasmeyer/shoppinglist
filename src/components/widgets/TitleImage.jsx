@@ -69,7 +69,6 @@ export default class TitleImage extends ValidatedComponent {
 
     const wrapperStyle = {...styleWrapper, height: this._randomHeight()};
     const imgPath = require(`assets/images/${path}`);
-    console.info('[TitleImage.jsx] ', imgPath);
 
     return <div style={wrapperStyle} onClick={onClick}>
       <img style={style} src={imgPath} />

@@ -5,7 +5,7 @@ import promiseMiddleware from 'redux-promise';
 import {Provider} from 'react-redux';
 import {DevTools, DebugPanel, LogMonitor} from 'redux-devtools/lib/react_';
 
-import configureStore from '../store/configureStore.js';
+import configureStore from 'utils/configureStore';
 const store = configureStore();
 
 import App from 'components/App.jsx';

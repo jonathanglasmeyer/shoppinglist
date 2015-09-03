@@ -3,7 +3,7 @@ import ParseReact from 'parse-react';
 import {Parse} from 'parse';
 // import {Link} from 'react-router';
 
-import {SHOPPINGLIST_ITEM} from 'constants';
+// import {SHOPPINGLIST_ITEM} from 'constants';
 
 import {Card, TitleImage} from 'widgets';
 
@@ -43,13 +43,14 @@ export default class Recipe extends Component {
       return;
     }
 
-    ingredients.map(ingredient => {
-      ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
-        name: ingredient,
-        done: false,
-        user: Parse.User.current().toPlainObject()
-      }).dispatch();
-    });
+    // ingredients.map(ingredient => {
+    //   ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
+    //     name: ingredient,
+    //     done: false,
+    //     user: Parse.User.current().toPlainObject()
+    //   }).dispatch();
+    // });
+
   }
 
 }

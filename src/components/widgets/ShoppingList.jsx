@@ -15,15 +15,13 @@ import ShoppingListInput from './ShoppingList/ShoppingListInput.jsx';
 import ShoppingListTitlebar from './ShoppingList/ShoppingListTitlebar.jsx';
 import ShoppingListFooter from './ShoppingList/ShoppingListFooter.jsx';
 
-import {SHOPPINGLIST_ITEM} from 'constants';
-
-import * as shoppinglistActions from 'actions/shoppinglist';
+import * as shoppinglistActions from 'ducks/shoppinglist';
 
 const SNACKBAR_UNDO_CREATE = 'SNACKBAR_UNDO_CREATE';
 const SNACKBAR_UNDO_CLEAN = 'SNACKBAR_UNDO_CLEAN';
 
 @Radium
-@connect((state) => ({items: state.shoppinglistItems}), shoppinglistActions)
+@connect((state) => ({items: state.shoppinglist}), shoppinglistActions)
 export default class ShoppingList extends Component {
   static propTypes = {
     items: PropTypes.array
@@ -32,16 +30,8 @@ export default class ShoppingList extends Component {
   componentDidMount() {
     this.props.fetchAllItems();
   }
-  // observe() {
-  //   return {
-  //     items: new Parse.Query(SHOPPINGLIST_ITEM)
-  //       .equalTo('user', Parse.User.current())
-  //       .ascending('updatedAt')
-  //   };
-  // }
 
   render() {
-    console.info('[ShoppingList.jsx] ', this.props);
     const {items} = this.props;
     // const isLoading = !!this.pendingQueries().length;
     const isLoading = false;
@@ -96,7 +86,6 @@ export default class ShoppingList extends Component {
   }
 
   _handleAddItem(name) {
-    console.info('[ShoppingList.jsx] ', 'add');
     this.props.addItem(name.trim());
     // ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
     //   name: name.trim(),
@@ -160,11 +149,12 @@ export default class ShoppingList extends Component {
   _handleUndoClean() {
     this.refs[SNACKBAR_UNDO_CLEAN].dismiss();
 
-    this.cleanedItems.map(({name, done, user}) => {
-      ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
-        name, done, user
-      }).dispatch();
-    });
+    // this.cleanedItems.map(({name, done, user}) => {
+    //   ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
+    //     name, done, user
+    //   }).dispatch();
+    // });
+
   }
 
   _handleUndoCreate() {

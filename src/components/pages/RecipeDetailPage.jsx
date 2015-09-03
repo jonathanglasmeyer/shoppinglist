@@ -21,17 +21,17 @@ export default class RecipeDetailPage extends ParseComponent {
     // })
   }
 
-  observe() {
-    return {
-      items: new Parse.Query(SHOPPINGLIST_ITEM)
-        .equalTo('user', Parse.User.current())
-        .ascending('updatedAt')
-    };
-  }
+  // observe() {
+  //   return {
+  //     items: new Parse.Query(SHOPPINGLIST_ITEM)
+  //       .equalTo('user', Parse.User.current())
+  //       .ascending('updatedAt')
+  //   };
+  // }
 
   render() {
     // const {recipe} = this.props;
-    console.info('[RecipeDetailPage.jsx] ', this.data);
+    // console.info('[RecipeDetailPage.jsx] ', this.data);
     // console.info('[RecipeDetailPage.jsx] ', recipe);
 
     return <SingleColumn>

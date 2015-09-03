@@ -1,2 +1,0 @@
-export const SHOPPINGLIST_ITEM = 'SHOPPINGLIST_ITEM';
-export const RECIPE = 'RECIPE';
