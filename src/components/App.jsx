@@ -1,6 +1,6 @@
+require('../styles/global.less');
+
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
-
-
 import {Parse} from 'parse';
 import Radium from 'radium';
 import ParseComponent from 'parse-react/class';
@@ -8,6 +8,8 @@ import ParseReact from 'parse-react';
 import {MainPage} from 'pages';
 import {Styles} from 'material-ui';
 const ThemeManager = new Styles.ThemeManager();
+
+require('react-tap-event-plugin')();
 
 // import NavigationBar from './App/NavigationBar.jsx';
 // import Footer from './App/Footer.jsx';

@@ -7,23 +7,25 @@ var port = process.env.HOT_LOAD_PORT || 8888;
 module.exports = {
   entry: {
     app: [
-      'webpack-dev-server/client?http://' + hostname + ':' + port,
-      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client',
       './src/entry.jsx'
     ]
   },
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: 'http://' + hostname + ':' + port + '/public/'
+    publicPath: '/static/'
   },
   eslint: {
     emitWarning: true
   },
   module: {
     loaders: [
-      {test: /\.jsx?$/, exclude: /node_modules/, loaders:
-        ['react-hot', 'babel-loader?stage=0&optional=runtime']},
+      {test: /\.jsx?$/, include: [
+          path.join(__dirname, 'src'), 
+          path.join(__dirname, 'config')
+        ],
+       loaders: ['babel']},
 
       {test: /\.less$/, loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!less-loader'},
 
@@ -37,8 +39,8 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.less']
   },
   plugins: [
-    new webpack.IgnorePlugin(/vertx/),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
      'process.env': {
        'NODE_ENV': JSON.stringify('development')
