@@ -13,6 +13,7 @@ export function fetchAll() {
 }
 
 export function save(itemText) {
+  console.info('[index.js] ', 'bla');
   return (new ShoppingListItem).save({
     name: itemText.trim(),
     done: false,

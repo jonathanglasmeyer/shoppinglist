@@ -1,12 +1,12 @@
 import {createStore, compose, applyMiddleware} from 'redux';
-// import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 // import loggerMiddleware from 'redux-logger';
 import rootReducer from '../ducks';
 import promiseMiddleware from 'redux-promise';
 import { devTools, persistState } from 'redux-devtools';
 
 const createStoreWithMiddleware = compose(
-  applyMiddleware(promiseMiddleware),
+  applyMiddleware(thunkMiddleware, promiseMiddleware),
   devTools(),
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
 )(createStore);
