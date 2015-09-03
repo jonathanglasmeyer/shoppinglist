@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var hostname = process.env.HOT_LOAD_HOSTNAME || 'localhost';
 var port = process.env.HOT_LOAD_PORT || 8888;
+import * as loaders from './webpack/loaders.js';
 
 module.exports = {
   entry: {
@@ -19,28 +20,7 @@ module.exports = {
   eslint: {
     emitWarning: true
   },
-  module: {
-    loaders: [
-      {test: /\.jsx?$/, include: [
-          path.join(__dirname, 'src'), 
-          path.join(__dirname, 'config')
-        ],
-       loaders: ['babel']},
-
-      {test: /\.less$/, loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!less-loader'},
-
-      {test: /\.(?:eot|ttf|woff2?)$/, loader: 'file-loader?name=[path][name]-[hash:6].[ext]&context=assets'},
-
-      {
-        test: /.*\.(gif|png|jpe?g|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
-        ]
-      }
-
-    ]
-  },
+  module: {loaders: [loaders.jsxLoader, loaders.lessLoader, loaders.fontLoader, loaders.imageLoader]},
   resolve: {
     modulesDirectories: ['node_modules', 'src/components', '.', 'src'],
     extensions: ['', '.js', '.jsx', '.less']

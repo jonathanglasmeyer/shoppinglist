@@ -17,7 +17,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.jsx?$/, exclude: /node_modules/,
-        loader: 'babel-loader?stage=0&optional=runtime'},
+        loader: 'babel'},
 
       {test: /\.less$/, loader:
         ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!less-loader')},
@@ -35,7 +35,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.less']
   },
   plugins: [
-    new webpack.IgnorePlugin(/vertx/),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

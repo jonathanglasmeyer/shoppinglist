@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import {ValidatedComponent} from 'utils';
 import Radium from 'radium';
-const myImg = require('assets/images/recipe4.jpg');
-console.info('[TitleImage.jsx] ', myImg);
 
 import {Title} from 'widgets';
 
