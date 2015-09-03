@@ -1,3 +1,5 @@
+require('../styles/global.less');
+
 import React, {Component} from 'react';
 import promiseMiddleware from 'redux-promise';
 import {Provider} from 'react-redux';

@@ -12,11 +12,11 @@ export const jsxLoader = (prod) => ({
   loaders: ['babel']
 });
 
-const _less = 'css!autoprefixer?{browsers:["last 2 version"]}!less'
+const _less = 'style!css!autoprefixer?{browsers:["last 2 version"]}!less'
 
 export const lessLoader = (prod) => ({
   test: /\.less$/,
-  loader: prod ? ExtractTextPlugin.extract('style-loader', _less) : _less
+  loader: prod ? ExtractTextPlugin.extract(_less) : _less
 });
 
 export const fontLoader = (prod) => ({
