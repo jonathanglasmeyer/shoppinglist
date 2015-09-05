@@ -7,7 +7,7 @@ const ShoppingListItem = Parse.Object.extend(SHOPPINGLIST_ITEM);
 export function fetchAll() {
   return (new Parse.Query(SHOPPINGLIST_ITEM)
       .equalTo('user', Parse.User.current())
-      .descending('updatedAt')).find();
+      .descending('createdAt')).find();
 }
 
 export function save(itemText) {
@@ -16,4 +16,11 @@ export function save(itemText) {
     done: false,
     user: Parse.User.current()
   })
+}
+
+export function setDone({item, done}) {
+  console.info('[API setdone] ', item.toPlainObject().done);
+  item.set('done', done);
+  console.info('[API setdone] ', item.toPlainObject().done);
+  return item.save();
 }

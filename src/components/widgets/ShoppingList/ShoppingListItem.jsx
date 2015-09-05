@@ -11,12 +11,16 @@ export default class ShoppingListItem extends ValidatedComponent {
   }
 
   render() {
-    const {item, onSetDone} = this.props;
+    const {item: item_, onSetDone} = this.props;
+
+    // item_ is the Parse object OR the temporary object.
+    const item = item_.toPlainObject ? item_.toPlainObject() : item_;
+
     let textColor = item.done ? colors.GRAY_DISABLED_TEXT : colors.TEXT;
-    if (item.temporary) textColor = '#666';
+    if (item.temporary) textColor = 'red';
 
     return <ListItem
-      onClick={() => item.temporary? {} : onSetDone(item, !item.done)}
+      onClick={() => item.temporary? {} : onSetDone(item_, !item.done)}
       clickable={!item.temporary}>
 
       <SquiggleText

@@ -5,34 +5,28 @@ import * as Api from 'api';
 const ADD = 'shoppinglist/ADD';
 const FETCH = 'shoppinglist/FETCH';
 const ADD_LOCAL = 'shoppinglist/ADD_LOCAL';
-const TOGGLE_LOCAL = 'shoppinglist/TOGGLE_LOCAL';
+const SET_DONE_LOCAL = 'shoppinglist/SET_DONE_LOCAL';
 
 import {max as _max} from 'lodash';
 
 export const fetchItems = createAction(FETCH, Api.fetchAll);
 export const addLocalItem = createAction(ADD_LOCAL);
-export const toggleLocalItem = createAction(TOGGLE_LOCAL);
+export const setDoneLocalItem = createAction(SET_DONE_LOCAL);
 
 /**
- * - execute an optimistic update, 
- * - then make an api call, 
- * - then replace temporary app state 
+ * - execute an optimistic update,
+ * - then make an api call,
+ * - then replace temporary app state
  */
-function optimistically(dispatch, optimisticActionCreator, apiCall) {
+function optimistically(optimisticActionCreator, apiCall) {
   return (dispatch) => {
     dispatch(optimisticActionCreator);
-    apiCall.then(() => dispatch(fetchItems()));
+    if (apiCall) apiCall.then(() => dispatch(fetchItems()));
   }
 }
 
-export const addItem = (text) => optimistically(dispatch, addLocalItem(text), Api.save(text));
-
-export function toggleItem(id) {
-  return (dispatch) => {
-    dispatch(toggleLocalItem(text));
-    Api.save(text).then(() => dispatch(fetchItems()));
-  }
-}
+export const addItem = text => optimistically(addLocalItem(text), Api.save(text));
+export const setDoneItem = payload => optimistically(setDoneLocalItem(payload), Api.setDone(payload));
 
 export default function reducer(state=[], action) {
   switch (action.type) {
@@ -45,13 +39,41 @@ export default function reducer(state=[], action) {
     }, ...state];
   }
 
+  case SET_DONE_LOCAL: {
+    const {item: itemClicked, done} = action.payload; // item is a Parse item
+    const itemPlain = itemClicked.toPlainObject();
+
+    return state.map(item => item.id === itemClicked.id ? 
+        {...itemPlain, temporary: true, done} : item);
+  }
+
   case FETCH: {
-    const items = action.payload;
-    const itemsPlain = items.map(item => item.toPlainObject());
-    return itemsPlain;
+    // const items = action.payload;
+    // const itemsPlain = items.map(item => item.toPlainObject());
+    return action.payload;
   }
 
   default:
     return state;
   }
 }
+
+const store = {
+  shoppingListItems: [
+    {
+      name: 'Banane',
+      done: false,
+      id: 1
+    },
+    {
+      name: 'Apfel',
+      done: false,
+      id: 1
+    }
+
+  ]
+}
+
+
+
+

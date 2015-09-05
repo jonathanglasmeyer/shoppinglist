@@ -94,10 +94,11 @@ export default class ShoppingList extends Component {
   }
 
   /**
-   * item: the whole parse item
+   * item: the whole Parse item
    * done: bool
    */
   _handleSetDone(item, done) {
+    this.props.setDoneItem({item, done});
     // ParseReact.Mutation.Set(item, {done}).dispatch();
   }
 
