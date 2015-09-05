@@ -10,16 +10,16 @@ export function fetchAll() {
       .descending('createdAt')).find();
 }
 
-export function save(itemText) {
+export function save({name}) {
   return (new ShoppingListItem).save({
-    name: itemText.trim(),
+    name,
     done: false,
     user: Parse.User.current()
   })
 }
 
-export function saveAll(itemTexts) {
-  return Promise.all(itemTexts.map(save));
+export function saveAll({names}) {
+  return Promise.all(names.map(save));
 }
 
 export function setDone({item, done}) {

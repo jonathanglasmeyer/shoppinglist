@@ -85,7 +85,7 @@ export default class ShoppingList extends Component {
   }
 
   _handleAddItem(name) {
-    this.props.addItem(name.trim());
+    this.props.addItem({name: name.trim()});
 
     setTimeout(() => {
       this._notifyItemAdded(name);

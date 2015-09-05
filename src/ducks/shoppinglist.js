@@ -31,25 +31,26 @@ function optimistically(optimisticActionCreator, apiCall) {
 }
 
 export const fetchItems = createAction(FETCH, Api.fetchAll);
-export const addItem = text => optimistically(addLocalItem(text), Api.save(text));
-export const addItems = texts => optimistically(addLocalItem(texts), Api.saveAll(texts));
+export const addItem = payload => optimistically(addLocalItem(payload), Api.save(payload));
+export const addItems = payload => optimistically(addLocalItem(payload), Api.saveAll(payload));
 export const setDoneItem = payload => optimistically(setDoneLocalItem(payload), Api.setDone(payload));
 export const setAllDone = payload => optimistically(setAllDoneLocal(payload), Api.setAllDone(payload));
 export const deleteAllDone = payload => optimistically(deleteAllDoneLocal(payload), Api.deleteAllDone(payload));
 
 export default function reducer(state=[], action) {
+  const {payload} = action;
   switch (action.type) {
 
   case ADD_LOCAL_ITEM: {
     return [{
-      name: action.payload,
+      name: payload.name,
       temporary: true,
       done: false,
     }, ...state];
   }
 
   case ADD_LOCAL_ITEMS: {
-    const items = action.payload.texts.map(text => ({
+    const items = payload.names(text => ({
       name: text,
       temporary: true,
       done: false,
@@ -59,7 +60,7 @@ export default function reducer(state=[], action) {
   }
 
   case SET_DONE_LOCAL: {
-    const {item: itemClicked, done} = action.payload; // item is a Parse item
+    const {item: itemClicked, done} = payload; // item is a Parse item
     const itemPlain = itemClicked.toPlainObject();
 
     return state.map(item => item.id === itemClicked.id ?
@@ -67,16 +68,16 @@ export default function reducer(state=[], action) {
   }
 
   case SET_ALL_DONE_LOCAL: {
-    const {done} = action.payload; // item is a Parse item
+    const {done} = payload; // item is a Parse item
     return state.map(item => ({name: item.get('name'), temporary: true, done}));
   }
 
   case DELETE_ALL_DONE_LOCAL: {
-    return action.payload.items;
+    return state.filter(item => !item.get('done'));
   }
 
   case FETCH: {
-    return action.payload;
+    return payload;
   }
 
   default:
