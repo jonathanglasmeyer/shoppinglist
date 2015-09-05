@@ -24,6 +24,7 @@ export function setDone({item, done}) {
 }
 
 export function setAllDone({done, items}) {
+  console.info('[API: setDone] ', done);
   items.forEach(item => item.set('done', done));
   return Parse.Object.saveAll(items);
 }

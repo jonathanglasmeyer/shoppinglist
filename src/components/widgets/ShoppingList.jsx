@@ -35,8 +35,7 @@ export default class ShoppingList extends Component {
     const {items} = this.props;
     // const isLoading = !!this.pendingQueries().length;
     const isLoading = false;
-    // const isAnItemDone = _some(this.data.items, item => item.done);
-    const isAnItemDone = false;
+    const isAnItemDone = _some(items, item => item.get && item.get('done'));
     // const itemsExist = items && !!items.length;
     const itemsExist = true;
 
@@ -104,14 +103,15 @@ export default class ShoppingList extends Component {
 
   _handleSetAllDone() {
     const done = !this._allDone();
-    this.props.setAllDone({items: this.props.items, done: !done});
+    this.props.setAllDone({items: this.props.items, done});
   }
 
   _handleDeleteAllDone() {
-    const doneItems = this.props.items.filter(item => item.done);
-    doneItems.forEach(item => ParseReact.Mutation.Destroy(item).dispatch());
+    // const doneItems = this.props.items.filter(item => item.done);
+    // doneItems.forEach(item => ParseReact.Mutation.Destroy(item).dispatch());
+    this.props.deleteAllDone(this.props.items);
 
-    this.cleanedItems = doneItems;
+    // this.cleanedItems = doneItems;
     this._notifyItemsCleaned();
   }
 
