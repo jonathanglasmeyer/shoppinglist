@@ -110,7 +110,7 @@ export default class ShoppingList extends Component {
     const doneItems = this.props.items.filter(item => item.get && item.get('done'));
     this.props.deleteAllDone({items: doneItems});
 
-    // this.cleanedItems = doneItems;
+    this.cleanedItems = doneItems;
     this._notifyItemsCleaned();
   }
 
@@ -139,12 +139,7 @@ export default class ShoppingList extends Component {
   _handleUndoClean() {
     this.refs[SNACKBAR_UNDO_CLEAN].dismiss();
 
-    // this.cleanedItems.map(({name, done, user}) => {
-    //   ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
-    //     name, done, user
-    //   }).dispatch();
-    // });
-
+    this.props.addItems(this.cleanedItems.map(item => item.get('name')));
   }
 
   _handleUndoCreate() {

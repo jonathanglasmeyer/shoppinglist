@@ -18,6 +18,10 @@ export function save(itemText) {
   })
 }
 
+export function saveAll(itemTexts) {
+  return Promise.all(itemTexts.map(save));
+}
+
 export function setDone({item, done}) {
   item.set('done', done);
   return item.save();
