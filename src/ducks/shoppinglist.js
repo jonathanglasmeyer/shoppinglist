@@ -32,7 +32,7 @@ function optimistically(optimisticActionCreator, apiCall) {
 export const addItem = text => optimistically(addLocalItem(text), Api.save(text));
 export const setDoneItem = payload => optimistically(setDoneLocalItem(payload), Api.setDone(payload));
 export const setAllDone = payload => optimistically(setAllDoneLocal(payload), Api.setAllDone(payload));
-export const deleteAllDone = payload => optimistically(deleteAllDoneLocal(payload)); //, Api.deleteAllDone(payload));
+export const deleteAllDone = payload => optimistically(deleteAllDoneLocal(payload), Api.deleteAllDone(payload));
 
 export default function reducer(state=[], action) {
   switch (action.type) {
@@ -59,7 +59,7 @@ export default function reducer(state=[], action) {
   }
 
   case DELETE_ALL_DONE_LOCAL: {
-    return state.filter(item => item.get('done') === false);
+    return action.payload.items;
   }
 
   case FETCH: {

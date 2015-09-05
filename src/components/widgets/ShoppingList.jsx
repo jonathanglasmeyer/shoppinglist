@@ -107,9 +107,8 @@ export default class ShoppingList extends Component {
   }
 
   _handleDeleteAllDone() {
-    // const doneItems = this.props.items.filter(item => item.done);
-    // doneItems.forEach(item => ParseReact.Mutation.Destroy(item).dispatch());
-    this.props.deleteAllDone(this.props.items);
+    const doneItems = this.props.items.filter(item => item.get && item.get('done'));
+    this.props.deleteAllDone({items: doneItems});
 
     // this.cleanedItems = doneItems;
     this._notifyItemsCleaned();

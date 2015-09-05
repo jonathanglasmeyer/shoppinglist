@@ -28,3 +28,7 @@ export function setAllDone({done, items}) {
   items.forEach(item => item.set('done', done));
   return Parse.Object.saveAll(items);
 }
+
+export function deleteAllDone({items}) {
+  return Parse.Object.destroyAll(items);
+}
