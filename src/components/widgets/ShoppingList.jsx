@@ -28,7 +28,7 @@ export default class ShoppingList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAllItems();
+    this.props.fetchItems();
   }
 
   render() {
@@ -64,10 +64,10 @@ export default class ShoppingList extends Component {
 
         {isLoading && <Spinner />}
 
-        {!isLoading && (items || []).map(item =>
+        {!isLoading && (items || []).map((item, idx) =>
             <ShoppingListItem
               onSetDone={::this._handleSetDone}
-              key={item.id}
+              key={idx}
               item={item} />)}
 
       </List>
