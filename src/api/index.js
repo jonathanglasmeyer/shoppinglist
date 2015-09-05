@@ -1,6 +1,4 @@
 import Parse from 'utils/myParse';
-import * as classes from '../constants';
-
 export const SHOPPINGLIST_ITEM = 'SHOPPINGLIST_ITEM';
 // export const RECIPE = 'RECIPE';
 

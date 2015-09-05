@@ -6,7 +6,7 @@ import {Parse} from 'parse';
 import {SingleColumn} from 'layouts';
 import {Card, Titlebar, List, ListItem} from 'widgets';
 
-import {SHOPPINGLIST_ITEM} from 'constants';
+// import {SHOPPINGLIST_ITEM} from 'constants';
 
 export default class RecipeDetailPage extends ParseComponent {
   static propTypes = {

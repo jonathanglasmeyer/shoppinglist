@@ -5,18 +5,17 @@ import {fetchAll, save} from 'api';
 const ADD = 'shoppinglist/ADD';
 const FETCH = 'shoppinglist/FETCH';
 const ADD_LOCAL = 'shoppinglist/ADD_LOCAL';
+const ADD_REMOTE = 'shoppinglist/ADD_REMOTE';
 
 export const fetchAllItems = createAction(FETCH, fetchAll);
 export const addLocalItem = createAction(ADD_LOCAL);
+export const addRemoteItem = createAction(ADD_REMOTE, save);
 
 export function addItem(text) {
-  console.info('[shoppinglist.js actioncreator] ', 'addItem');
   return (dispatch) => {
     dispatch(addLocalItem(text));
-    return {
-      type: ADD,
-      payload: save
-    }
+    console.info('[shoppinglist.js] ', 'done');
+    dispatch(addRemoteItem(text));
   }
 }
 
@@ -27,13 +26,13 @@ export function addItem(text) {
 export default function reducer(state=[], action) {
   switch (action.type) {
 
-  case ADD: {
-    console.info('[shoppinglist.js ADD]')
+  case ADD_REMOTE: {
+    console.info('[shoppinglist.js reduce: add remote]')
     return state;
   }
 
   case ADD_LOCAL: {
-    console.info('[shoppinglist.js] ', 'reducer: shoppinglist');
+    console.info('[shoppinglist.js] ', 'add local');
     return [{name: action.payload, done: false}, ...state];
   }
 
