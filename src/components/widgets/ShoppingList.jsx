@@ -103,11 +103,8 @@ export default class ShoppingList extends Component {
   }
 
   _handleSetAllDone() {
-    const bool = !this._allDone();
-
-    // this.data.items.forEach(item => {
-      // ParseReact.Mutation.Set(item, {done: bool}).dispatch();
-    // });
+    const done = !this._allDone();
+    this.props.setAllDone({items: this.props.items, done: !done});
   }
 
   _handleDeleteAllDone() {

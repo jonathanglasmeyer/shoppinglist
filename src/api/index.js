@@ -19,8 +19,14 @@ export function save(itemText) {
 }
 
 export function setDone({item, done}) {
-  console.info('[API setdone] ', item.toPlainObject().done);
   item.set('done', done);
-  console.info('[API setdone] ', item.toPlainObject().done);
   return item.save();
+}
+
+export function setAllDone({done, items}) {
+  const newItems = items.map(item => {
+    item.set('done', done);
+    return item;
+  });
+  return Parse.Object.saveAll(newItems);
 }
