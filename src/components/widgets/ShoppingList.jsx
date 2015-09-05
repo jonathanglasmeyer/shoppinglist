@@ -87,17 +87,10 @@ export default class ShoppingList extends Component {
 
   _handleAddItem(name) {
     this.props.addItem(name.trim());
-    // ParseReact.Mutation.Create(SHOPPINGLIST_ITEM, {
-    //   name: name.trim(),
-    //   done: false,
-    //   user: Parse.User.current().toPlainObject()
-    // }).dispatch().then(item => {
-    //   this.lastCreatedItem = item;
-    // });
 
-    // setTimeout(() => {
-    //   this._notifyItemAdded(name);
-    // }, 100);
+    setTimeout(() => {
+      this._notifyItemAdded(name);
+    }, 100);
   }
 
   /**
