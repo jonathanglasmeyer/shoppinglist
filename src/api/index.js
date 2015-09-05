@@ -24,9 +24,6 @@ export function setDone({item, done}) {
 }
 
 export function setAllDone({done, items}) {
-  const newItems = items.map(item => {
-    item.set('done', done);
-    return item;
-  });
-  return Parse.Object.saveAll(newItems);
+  items.forEach(item => item.set('done', done));
+  return Parse.Object.saveAll(items);
 }

@@ -52,16 +52,10 @@ export default function reducer(state=[], action) {
 
   case SET_ALL_DONE_LOCAL: {
     const {done} = action.payload; // item is a Parse item
-    console.time('f');
-    const s =  state.map(item => ({...item.toPlainObject(), temporary: true, done}));
-    // const s =  state.map(item => ({name: item.get('name'), temporary: true, done}));
-    console.timeEnd('f');
-    return s;
+    return state.map(item => ({name: item.get('name'), temporary: true, done}));
   }
 
   case FETCH: {
-    // const items = action.payload;
-    // const itemsPlain = items.map(item => item.toPlainObject());
     return action.payload;
   }
 
@@ -69,23 +63,4 @@ export default function reducer(state=[], action) {
     return state;
   }
 }
-
-const store = {
-  shoppingListItems: [
-    {
-      name: 'Banane',
-      done: false,
-      id: 1
-    },
-    {
-      name: 'Apfel',
-      done: false,
-      id: 1
-    }
-
-  ]
-}
-
-
-
 
