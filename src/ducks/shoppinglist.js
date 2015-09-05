@@ -11,7 +11,6 @@ import {max as _max} from 'lodash';
 
 export const fetchItems = createAction(FETCH, Api.fetchAll);
 export const addLocalItem = createAction(ADD_LOCAL);
-// export const addRemoteItem = createAction(ADD_REMOTE, (text) => Api.save(text).then(Api.fetchAll));
 
 export function addItem(text) {
   return (dispatch) => {

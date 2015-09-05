@@ -5,14 +5,12 @@ export const SHOPPINGLIST_ITEM = 'SHOPPINGLIST_ITEM';
 const ShoppingListItem = Parse.Object.extend(SHOPPINGLIST_ITEM);
 
 export function fetchAll() {
-  console.info('[api] ', 'fetch');
   return (new Parse.Query(SHOPPINGLIST_ITEM)
       .equalTo('user', Parse.User.current())
       .descending('updatedAt')).find();
 }
 
 export function save(itemText) {
-  console.info('[api] ', 'save');
   return (new ShoppingListItem).save({
     name: itemText.trim(),
     done: false,

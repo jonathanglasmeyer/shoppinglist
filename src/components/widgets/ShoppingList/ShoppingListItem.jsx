@@ -13,11 +13,11 @@ export default class ShoppingListItem extends ValidatedComponent {
   render() {
     const {item, onSetDone} = this.props;
     let textColor = item.done ? colors.GRAY_DISABLED_TEXT : colors.TEXT;
-    if (item.temporary) textColor = 'red';
+    if (item.temporary) textColor = '#666';
 
     return <ListItem
-      onClick={() => onSetDone(item, !item.done)}
-      clickable>
+      onClick={() => item.temporary? {} : onSetDone(item, !item.done)}
+      clickable={!item.temporary}>
 
       <SquiggleText
         color={textColor}
