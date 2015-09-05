@@ -81,7 +81,7 @@ export default class ShoppingList extends Component {
    * returns: bool
    */
   _allDone() {
-    return _all(this.props.items, item => item.done);
+    return _all(this.props.items, item => item.get && item.get('done'));
   }
 
   _handleAddItem(name) {

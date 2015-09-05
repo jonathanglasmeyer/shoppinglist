@@ -17,7 +17,7 @@ export default class ShoppingListItem extends ValidatedComponent {
     const item = item_.toPlainObject ? item_.toPlainObject() : item_;
 
     let textColor = item.done ? colors.GRAY_DISABLED_TEXT : colors.TEXT;
-    if (item.temporary) textColor = 'red';
+    // if (item.temporary) textColor = 'red';
 
     return <ListItem
       onClick={() => item.temporary? {} : onSetDone(item_, !item.done)}
